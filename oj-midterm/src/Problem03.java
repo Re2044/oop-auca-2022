@@ -19,7 +19,7 @@ public class Problem03 {
                     res+=abc.charAt(26+pos-num);
                 }
                 else
-                     res+=abc.charAt((pos-num));
+                    res+=abc.charAt((pos-num));
             }
             System.out.println(res);
         }
