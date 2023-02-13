@@ -1,8 +1,6 @@
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
-public class Problem04 {
+public class URI1238 {
     public static void main(String args[]){
         Scanner in = new Scanner(System.in);
         int n = in.nextInt();
