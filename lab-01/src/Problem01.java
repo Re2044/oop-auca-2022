@@ -7,55 +7,15 @@ public class Problem01 {
         //TurtleArray[1]= new Turtle("up",2,19,19);
         Field field = new Field(20,20,1,TurtleArray,0);
         Scanner in = new Scanner(System.in);
-        String inString = in.nextLine();
-
-        while(inString!="exit"){
+        while(in.hasNext()){
             boolean flag =false;
-            if(inString.length()>=4 && inString.substring(0,4).equals("move")){
-                try{
-                    String num = inString.substring(5,inString.length());
-                    try {
-                        int val = Integer. parseInt(num);
-                        if(val<0){
-                            throw new IllegalArgumentException("The number of steps can't be negative. Please, try again.");
-                        }
-                        field.MoveCurrTurtle(val,field);
-                        flag=true;
-                    }
-                    catch (NumberFormatException nfe) {
-                        System.out.println("The number of steps is not valid. Please, try again.");
-                        flag=true;
-                    }
-                }
-                catch(NumberFormatException nfe){
-                    System.out.println("The number of steps was not provided. Please, try again.");
-                    flag=true;
-                }
+            String inString = in.nextLine();
+            String ins[] = inString.split(" ");
+            if(ins.length==0){
+                throw new IllegalArgumentException("No commands to execute were provided. Please, try again.");
 
             }
-            if(inString.length()>=6 && inString.substring(0,6).equals("select")){
-                try {
-                    String num = inString.substring(7, inString.length());
-                    try {
-                        int val = Integer.parseInt(num);
-
-                        if(val!=1 || val!=2){
-                            throw new IllegalArgumentException("There is no turtle with the number" +val+". Please, try again.");
-                        }
-                        field.SetCurrTurtle(val);
-                        flag=true;
-                    }
-                    catch (NumberFormatException nfe) {
-                        System.out.println("The number of steps is not valid. Please, try again.");
-                        flag=true;
-                    }
-                }
-                catch (NumberFormatException nfe) {
-                    System.out.println("The turtle number was not provided. Please, try again.");
-                    flag=true;
-                }
-            }
-            switch(inString){
+            switch(ins[0]){
                 case "exit" :
                     System.exit(0);
                     break;
@@ -79,13 +39,51 @@ public class Problem01 {
                     field.Display();
                     flag=true;
                     break;
+                case "move" :
+                    flag=true;
+                    if(ins.length==1){
+                        throw new IllegalArgumentException("The number of steps was not provided. Please, try again.");
+                    }
+                    else if(ins.length>2){
+                        throw new IllegalArgumentException("More arguments than necessary were provided for the \"move\" command. Please, try again.");
+                    }
+                    else{
+                        try {
+                            int val = Integer. parseInt(ins[1]);
+                            if(val<0){
+                                throw new IllegalArgumentException("The number of steps can't be negative. Please, try again.");
+                            }
+                            field.MoveCurrTurtle(val,field);
+                        }
+                        catch (NumberFormatException nfe) {
+                            System.err.println("The number of steps is not valid. Please, try again.");
+                        }
+                    }
+                    break;
+                case "select" :
+                    flag=true;
+                    if(ins.length==1){
+                        throw new IllegalArgumentException("The turtle number was not provided. Please, try again.");
+                    }
+                    else if(ins.length>2){
+                        throw new IllegalArgumentException("More arguments than necessary were provided for the \"select\" command. Please, try again.");
+                    }
+                    else{
+                        try {
+                            int val = Integer.parseInt(ins[1]);
+                            if(val<0 || val> field.TurtleCount){
+                                throw new IllegalArgumentException("There is no turtle with the number" +val+". Please, try again.");
+                            }
+                            field.SetCurrTurtle(val);
+                            flag=true;
+                        }
+                        catch (NumberFormatException nfe) {
+                            System.err.println("The turtle number is not valid. Please, try again.");
+                        }
+                    }
             }
             if(flag==false){
                 throw new IllegalArgumentException("Unknown command. Please, try again.");
-            }
-            inString = in.nextLine();
-            if(inString.length()==0){
-                throw new IllegalArgumentException("No commands to execute were provided. Please, try again.");
             }
         }
         System.exit(0);
