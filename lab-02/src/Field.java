@@ -7,38 +7,31 @@ public class Field {
     private int TurtleCount = 2;
     private char [][]CellState = new char [sizeX][sizeY];
     public void GetCommand(String[] ins){
-        boolean flag = false;
-        if (ins.length == 0 || ins[0].isEmpty()) {
+
+        if (ins.length == 0 || ins[0].isEmpty() ) {
             throw new IllegalArgumentException("No commands to execute were provided. Please, try again.");
         }
         switch (ins[0]) {
-
             case "exit":
                 System.exit(0);
                 break;
             case "turn-right":
                 this.TurnCurrTurtleRight();
-                flag = true;
                 break;
             case "turn-left":
                 this.TurnCurrTurtleLeft();
-                flag = true;
                 break;
             case "pen-up":
                 this.PenCurrTurtleUp();
-                flag = true;
                 break;
             case "pen-down":
                 this.PenCurrTurtleDown();
-                flag = true;
                 break;
             case "display":
                 this.Display();
-                flag = true;
                 break;
             case "move":
-                flag = true;
-                if(ins.length==1){
+                if(ins.length==1 ||( (ins.length==2 && ins[1].isEmpty()))){
                     throw new IllegalArgumentException("The number of steps was not provided. Please, try again.");
                 }
                 if (ins.length > 2) {
@@ -58,8 +51,7 @@ public class Field {
                 }
                 break;
             case "select":
-                flag = true;
-                if(ins.length==1){
+                if(ins.length==1 ||( (ins.length==2 && ins[1].isEmpty()))){
                     throw new IllegalArgumentException("The turtle number was not provided. Please, try again.");
                 }
                 if (ins.length > 2) {
@@ -77,14 +69,12 @@ public class Field {
                         throw new IllegalArgumentException("There is no turtle with the number "+val+". Please, try again.");
                     }
                     this.SetCurrTurtle(val);
-                    flag = true;
-
                 }
                 break;
+            default:
+                throw new IllegalArgumentException("Unknown command. Please, try again.");
         }
-        if (flag == false) {
-            throw new IllegalArgumentException("Unknown command. Please, try again.");
-        }
+
     }
     private Turtle[] TurtleList = new Turtle[TurtleCount];
     public int GetTurtleCount(){return TurtleCount;}
