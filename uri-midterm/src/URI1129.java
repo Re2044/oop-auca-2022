@@ -18,7 +18,7 @@ public class URI1129 {
                 a3=(a3<=127)? (a3=1) : (a3=0);
                 a4=(a4<=127)? (a4=1) : (a4=0);
                 a5=(a5<=127)? (a5=1) : (a5=0);
-                if(a1+a2+a3+a4+a5>1){
+                if(a1+a2+a3+a4+a5>1 || a1+a2+a3+a4+a5==0){
                     System.out.println("*");
                 }
                 else{
