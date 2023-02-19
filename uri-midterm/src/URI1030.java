@@ -32,7 +32,7 @@ public class URI1030 {
                 else
                     currPos = arr.nextSetBit(0);
             }
-            System.out.println("Case "+(i+1)+": "+(arr.nextSetBit(0)+1));
+            System.out.println("Case "+(i+1)+": "+(currPos+1));
         }
     }
 }
