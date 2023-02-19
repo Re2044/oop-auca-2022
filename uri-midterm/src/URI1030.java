@@ -4,31 +4,34 @@ import java.util.List;
 import java.util.Scanner;
 
 public class URI1030 {
-    static int func(List<Integer>alive, int step, int currPos)
-    {
-        if (alive.size() == 1) {
-            return alive.get(0);
-        }
-        else{
-            currPos = ((currPos + step -1) % alive.size());
-            alive.remove(currPos);
-            return func(alive, step , currPos);
-        }
-
-
-    }
     public static void main(String args[]){
         Scanner in= new Scanner(System.in);
         int len = in.nextInt();
+        BitSet arr = new BitSet(10000);
         for(int i = 0 ; i < len; i++){
             int n = in.nextInt();
             int m = in.nextInt();
-            List<Integer> alive = new ArrayList<>();
-            for(int j = 1;j<=n;j++){
-                alive.add(j);
+            int currPos = 0 ;
+            int algPos = 1;
+            arr.set(0,n,true);
+            while(arr.cardinality()>1){
+                while(algPos<=m-1){
+                    currPos++;
+                    currPos%=n;
+                    if(arr.get(currPos)==true){
+                        algPos++;
+                    }
+                }
+                algPos = 1;
+                arr.set(currPos,false);
+                currPos++;
+                currPos%=n;
+                while(arr.get(currPos)==false){
+                    currPos++;
+                    currPos%=n;
+                }
             }
-            int ans = func(alive,m,0);
-            System.out.println("Case "+(i+1)+": "+ans );
+            System.out.println("Case "+(i+1)+": "+(arr.nextSetBit(0)+1));
         }
     }
 }
