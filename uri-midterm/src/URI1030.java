@@ -26,10 +26,11 @@ public class URI1030 {
                 arr.set(currPos,false);
                 currPos++;
                 currPos%=n;
-                while(arr.get(currPos)==false){
-                    currPos++;
-                    currPos%=n;
+                if(arr.nextSetBit(currPos)!=-1){
+                    currPos=arr.nextSetBit(currPos);
                 }
+                else
+                    currPos = arr.nextSetBit(0);
             }
             System.out.println("Case "+(i+1)+": "+(arr.nextSetBit(0)+1));
         }
