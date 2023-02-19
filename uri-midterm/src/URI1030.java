@@ -23,7 +23,7 @@ public class URI1030 {
         for(int i = 0 ; i < len; i++){
             int n = in.nextInt();
             int m = in.nextInt();
-            List<Integer> alive = new ArrayList<>(n);
+            List<Integer> alive = new ArrayList<>();
             for(int j = 1;j<=n;j++){
                 alive.add(j);
             }
