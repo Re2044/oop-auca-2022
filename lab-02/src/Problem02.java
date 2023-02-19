@@ -10,7 +10,11 @@ public class Problem02 {
         while (in.hasNext()) {
             boolean flag = false;
             String inString = in.nextLine();
+            inString= inString.trim();
             String ins[] = inString.split(" ");
+            for(int i = 0 ; i<ins.length;i++){
+                ins[i]=ins[i].trim();
+            }
             try {
                 field.GetCommand(ins);
             }

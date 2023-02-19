@@ -1,6 +1,15 @@
 
 
 public class Field {
+    public String CheckString(String in){
+        String news = "";
+        for(int i = 0;i<in.length();i++) {
+            if(in.charAt(i)!=' ' && in.charAt(i)!=' '){
+                news+=in.charAt(i);
+            }
+        }
+        return news;
+    }
     private int currTurtle = 0;
     private int sizeX = 20;
     private int sizeY = 20;
@@ -8,7 +17,7 @@ public class Field {
     private char [][]CellState = new char [sizeX][sizeY];
     public void GetCommand(String[] ins){
 
-        if (ins.length == 0 || ins[0].isEmpty() ) {
+        if (ins.length == 0 || CheckString(ins[0]).isEmpty() ) {
             throw new IllegalArgumentException("No commands to execute were provided. Please, try again.");
         }
         switch (ins[0]) {
