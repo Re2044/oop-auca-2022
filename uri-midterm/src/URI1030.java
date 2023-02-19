@@ -4,15 +4,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class URI1030 {
-    static void func(List<Integer>alive, int step, int currPos)
+    static int func(List<Integer>alive, int step, int currPos)
     {
         if (alive.size() == 1) {
-            System.out.println(alive.get(0));
+            return alive.get(0);
         }
         else{
             currPos = ((currPos + step -1) % alive.size());
             alive.remove(currPos);
-            func(alive, step , currPos);
+            return func(alive, step , currPos);
         }
 
 
@@ -27,7 +27,8 @@ public class URI1030 {
             for(int j = 1;j<=n;j++){
                 alive.add(j);
             }
-            func(alive,m,0);
+            int ans = func(alive,m,0);
+            System.out.println("Case "+(i+1)+": "+ans );
         }
     }
 }
