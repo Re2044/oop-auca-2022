@@ -10,7 +10,7 @@ public class URI1272 {
             String[]ins = input.split("·");
             String res = "";
             for(int j  = 0;j<ins.length;j++){
-                if(ins[j]!="·" && ins[j].isEmpty()==false){
+                if(ins[j].isEmpty()==false){
                     res+=ins[j].charAt(0);
                 }
             }
