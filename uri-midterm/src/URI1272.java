@@ -8,18 +8,18 @@ public class URI1272 {
         for(int i = 0 ; i <len ; i++) {
             String input = in.nextLine();
             boolean flag = false;
-            String res = "";
+
             for (int pos = 0; pos < input.length(); pos++){
                 if (input.charAt(pos) == '·') {
                     flag = false;
                 } else {
                     if (flag == false) {
-                        res += input.charAt(pos);
+                        System.out.print(input.charAt(pos));
                         flag = true;
                     }
                 }
         }
-            System.out.println(res);
+            System.out.println();
     }
 
 
