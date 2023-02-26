@@ -5,6 +5,9 @@ public class URI1234 {
         Scanner in = new Scanner(System.in);
         while(in.hasNext()){
             String curr = in.nextLine();
+            if(curr.isEmpty()){
+                break;
+            }
             int zero = 0;
             int cnt = 0;
             String res = "";
@@ -22,8 +25,7 @@ public class URI1234 {
                     res+=curr.charAt(i);
                 }
             }
-            if(zero==0)
-                break;
+
             System.out.println(res);
         }
     }
