@@ -3,8 +3,11 @@ import java.util.Scanner;
 public class URI1234 {
     public static void main(String args[]){
         Scanner in = new Scanner(System.in);
-        while(in.hasNextLine()){
+        while(in.hasNext()){
             String curr = in.nextLine();
+            if(curr.length()==0){
+                break;
+            }
             int cnt = 0;
             String res = "";
             for(int i = 0;i<curr.length();i++){
