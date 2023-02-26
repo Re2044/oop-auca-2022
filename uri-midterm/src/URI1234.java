@@ -5,13 +5,12 @@ public class URI1234 {
         Scanner in = new Scanner(System.in);
         while(in.hasNext()){
             String curr = in.nextLine();
-            if(curr.length()==0){
-                break;
-            }
+            int zero = 0;
             int cnt = 0;
             String res = "";
             for(int i = 0;i<curr.length();i++){
                 if(curr.charAt(i)!=' '){
+                    zero++;
                     if(cnt%2==0){
                         res+=Character.toUpperCase(curr.charAt(i));
                     }
@@ -23,6 +22,8 @@ public class URI1234 {
                     res+=curr.charAt(i);
                 }
             }
+            if(zero==0)
+                break;
             System.out.println(res);
         }
     }
