@@ -5,16 +5,24 @@ public class URI1272 {
         Scanner in = new Scanner (System.in);
         int len = in.nextInt();
         String s = in.nextLine();
-        for(int i = 0 ; i <len ; i++){
+        for(int i = 0 ; i <len ; i++) {
             String input = in.nextLine();
-            String[]ins = input.split("·");
+            boolean flag = false;
             String res = "";
-            for(int j  = 0;j<ins.length;j++){
-                if(ins[j].length()>0){
-                    res+=ins[j].charAt(0);
+            for (int pos = 0; pos < input.length(); pos++){
+                if (input.charAt(pos) == '·') {
+                    flag = false;
+                } else {
+                    if (flag == false) {
+                        res += input.charAt(pos);
+                        flag = true;
+                    }
                 }
-            }
+        }
             System.out.println(res);
+    }
+
+
         }
     }
-}
+
