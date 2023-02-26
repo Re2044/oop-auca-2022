@@ -10,7 +10,7 @@ public class URI1272 {
             boolean flag = false;
 
             for (int pos = 0; pos < input.length(); pos++){
-                if (input.charAt(pos) == '·') {
+                if (input.charAt(pos) == ' ') {
                     flag = false;
                 } else {
                     if (flag == false) {
