@@ -42,55 +42,58 @@ public class URI1383 {
     public static void main(String args[]){
         Scanner in = new Scanner(System.in);
         int k = in.nextInt();
-        for(int i = 0 ; i<k;i++){
-            int [][] matrix = new int[9][9];
-            int [][][] minimx = new int[9][3][3];
-            for(int j = 0;j<9;j++){
-                for(int h =0;h<9;h++){
-                    int x =in.nextInt();
-                    matrix[j][h]=x;
-                    minimx[(j/3)*3+h/3][j%3][h%3]=x;
+        for(int i = 0 ; i<k;i++) {
+            int[][] matrix = new int[9][9];
+            int[][][] minimx = new int[9][3][3];
+            for (int j = 0; j < 9; j++) {
+                for (int h = 0; h < 9; h++) {
+                    int x = in.nextInt();
+                    matrix[j][h] = x;
+                    minimx[(j / 3) * 3 + h / 3][j % 3][h % 3] = x;
                 }
             }
-           // for(int j=0;j<9;j++){
-             //   printmx(minimx[j]);
-             //   System.out.println();
-           // }
-            System.out.println("Instancia "+(i+1));
-            boolean flag =true;
-            for(int j =0;j<9;j++) {
+            // for(int j=0;j<9;j++){
+            //   printmx(minimx[j]);
+            //   System.out.println();
+            // }
+            System.out.println("Instancia " + (i + 1));
+            boolean flag = true;
+            for (int j = 0; j < 9; j++) {
                 if (checkmr(minimx[j], 3, 3) == false) {
                     flag = false;
                     //System.out.println("1 "+j);
                     break;
                 }
             }
-            for(int j=0;j<9;j++){
-                if(checkstr(matrix[j],9)==false){
-                    flag= false;
-                   // System.out.println("2 "+j);
+            for (int j = 0; j < 9; j++) {
+                if (checkstr(matrix[j], 9) == false) {
+                    flag = false;
+                    // System.out.println("2 "+j);
                     break;
                 }
             }
-            for(int j =0;j<9;j++){
-                int[]check = new int[10];
-                for(int ii = 1 ;ii<10;ii++){
-                    check[ii]=0;
+            for (int j = 0; j < 9; j++) {
+                int[] check = new int[10];
+                for (int ii = 1; ii < 10; ii++) {
+                    check[ii] = 0;
                 }
-                for(int h =0;h<9;h++){
+                for (int h = 0; h < 9; h++) {
                     check[matrix[h][j]]++;
-                    if(check[matrix[h][j]]>1){
-                        flag=false;
-                   //     System.out.println("3 "+h);
+                    if (check[matrix[h][j]] > 1) {
+                        flag = false;
+                        //     System.out.println("3 "+h);
                         break;
                     }
                 }
 
             }
-           if(flag==false)
+            if (flag == false){
                 System.out.println("NAO");
+            System.out.println();
+        }
            else{
                System.out.println("SIM");
+               System.out.println();
            }
 
         }
