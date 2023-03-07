@@ -89,8 +89,11 @@ public class Rational {
         result.Simplify();
         return result;
     }
-    public int CompareTo(Rational other){
-
+    public int compareTo(Rational other) {
+        Rational Answer = this.Subtract(other);
+        if (Answer.GetNumerator()*Answer.GetDenominator()<0) {return -1;}
+        else if (Answer.GetNumerator()*Answer.GetDenominator()>0) {return 1;}
+        else return 0;
     }
     public boolean IsLowerOrEqual(Rational other) {if (IsLower(other)==true || Equals(other)==true) {return true;} else return false;}
     public boolean IsBiggerOrEqual(Rational other) {if (IsBigger(other)==true || Equals(other)==true) {return true;} else return false;}
