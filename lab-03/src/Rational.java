@@ -6,24 +6,37 @@ public class Rational {
     private static List<String> SymbolList = List.of("+","-","/","*",">=","<=","!=","=",">","<");
     private int numerator = 0;
     private int denominator = 0;
-    static String Operation(Rational first, Rational second, String InputString){
-        switch(InputString) {
+    static String Operation(Rational first, Rational second, String InputSymbol){
+        int Compare = first.compareTo(second);
+        switch(InputSymbol) {
             case "+":
-                return Rational.toString(first.Add(second));
-                break;
+                return Rational.toString(first.add(second));
             case "-":
-                return first.subtract(second);
-                break;
+                return Rational.toString(first.subtract(second));
             case "/":
-                return first.divide(second);
-                break;
+                return Rational.toString(first.divide(second));
             case "*":
-                return first.multiply(second);
-                break;
+                return Rational.toString(first.multiply(second));
             case "<":
-                return first.IsLower(second);
-                break;
-
+                if(Compare == -1) return "true";
+                else return "false";
+            case ">":
+                if(Compare == 1) return "true";
+                else return "false";
+            case "=":
+                if(Compare == 0) return "true";
+                else return "false";
+            case "!=":
+                if(Compare != 0) return "true";
+                else return "false";
+            case ">=":
+                if(Compare == 0 || Compare==1) return "true";
+                else return "false";
+            case "<=":
+                if(Compare == 0 || Compare==-1) return "true";
+                else return "false";
+            default:
+                throw new IllegalArgumentException("'"+InputSymbol+"' is not a valid operator.");
         }
     }
     public void ChangeDenominator(int NewDenominator){
@@ -56,21 +69,21 @@ public class Rational {
         this.denominator = denominator;
     }
 
-    public Rational Add(Rational other) {
+    public Rational add(Rational other) {
         int NewDenominator = lcd(this.denominator,other.GetDenominator());
         int NewNominator = (  NewDenominator/this.denominator ) * this.numerator + ( NewDenominator/other.GetDenominator() ) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
         return result;
     }
 
-    public Rational Subtract(Rational other) {
+    public Rational subtract(Rational other) {
         int NewDenominator = lcd(this.denominator, other.GetDenominator());
         int NewNominator = ( NewDenominator / this.denominator) * this.numerator - (NewDenominator / other.GetDenominator()) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
         return result;
     }
 
-    public Rational Multiply(Rational other) {
+    public Rational multiply(Rational other) {
         this.Simplify();
         other.Simplify();
         int NewNumerator = this.numerator*other.GetNumerator();
@@ -80,7 +93,7 @@ public class Rational {
         return result;
     }
 
-    public Rational Divide(Rational other) {
+    public Rational divide(Rational other) {
         this.Simplify();
         other.Simplify();
         int NewNumerator = this.numerator*other.GetDenominator();
@@ -90,7 +103,7 @@ public class Rational {
         return result;
     }
     public int compareTo(Rational other) {
-        Rational Answer = this.Subtract(other);
+        Rational Answer = this.subtract(other);
         if (Answer.GetNumerator()*Answer.GetDenominator()<0) {return -1;}
         else if (Answer.GetNumerator()*Answer.GetDenominator()>0) {return 1;}
         else return 0;
@@ -98,15 +111,15 @@ public class Rational {
     public boolean IsLowerOrEqual(Rational other) {if (IsLower(other)==true || Equals(other)==true) {return true;} else return false;}
     public boolean IsBiggerOrEqual(Rational other) {if (IsBigger(other)==true || Equals(other)==true) {return true;} else return false;}
     public boolean Equals(Rational other){
-        Rational SubtractResult = this.Subtract(other);
+        Rational SubtractResult = this.subtract(other);
         if (SubtractResult.GetNumerator() == 0) {return false;} else return true;
     }
     public boolean IsBigger(Rational other) {
-        Rational SubtractResult = this.Subtract(other);
+        Rational SubtractResult = this.subtract(other);
         if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return false;} else return true;
     }
     public boolean IsLower(Rational other) {
-        Rational SubtractResult = this.Subtract(other);
+        Rational SubtractResult = this.subtract(other);
         if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return true;} else return false;
     }
     static String toString(Rational InputRational) {
