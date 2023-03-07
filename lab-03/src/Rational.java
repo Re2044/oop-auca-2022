@@ -1,14 +1,53 @@
-public class Rational {
-    int numerator = 0;
-    int denominator = 0;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-    public int gcd(int a, int b) {
+public class Rational {
+    private static List<String> SymbolList = List.of("+","-","/","*",">=","<=","!=","=",">","<");
+    private int numerator = 0;
+    private int denominator = 0;
+    static String Operation(Rational first, Rational second, String InputString){
+        switch(InputString) {
+            case "+":
+                return Rational.toString(first.Add(second));
+                break;
+            case "-":
+                return first.subtract(second);
+                break;
+            case "/":
+                return first.divide(second);
+                break;
+            case "*":
+                return first.multiply(second);
+                break;
+            case "<":
+                return first.IsLower(second);
+                break;
+
+        }
+    }
+    public void ChangeDenominator(int NewDenominator){
+        this.denominator=NewDenominator;
+    }
+    public void ChangeNumerator(int NewNumerator){
+        this.numerator=NewNumerator;
+    }
+    public int GetNumerator(){return this.numerator;}
+    public int GetDenominator(){return this.denominator;}
+    public int gcd(int a, int  b) {
         if (b == 0)
             return a;
         else
             return gcd(b, a % b);
     }
-
+    public int lcd(int a,int b){
+        return (a*b)/gcd(a,b);
+    }
+    public void Simplify(){
+        int GCD = gcd(this.denominator,this.numerator);
+        this.ChangeNumerator(this.numerator/GCD);
+        this.ChangeDenominator(this.denominator/GCD);
+    }
     public Rational(int numerator, int denominator) {
         this.numerator = numerator;
         if (denominator == 0) {
@@ -18,83 +57,72 @@ public class Rational {
     }
 
     public Rational Add(Rational other) {
-        int NewDenominator = gcd(this.denominator, other.denominator);
-        int NewNominator = (NewDenominator / this.denominator) * this.numerator + (NewDenominator / other.denominator) * other.numerator;
+        int NewDenominator = lcd(this.denominator,other.GetDenominator());
+        int NewNominator = (  NewDenominator/this.denominator ) * this.numerator + ( NewDenominator/other.GetDenominator() ) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
         return result;
     }
 
-    public Rational subtract(Rational other) {
-        int NewDenominator = gcd(this.denominator, other.denominator);
-        int NewNominator = (NewDenominator / this.denominator) * this.numerator - (NewDenominator / other.denominator) * other.numerator;
+    public Rational Subtract(Rational other) {
+        int NewDenominator = lcd(this.denominator, other.GetDenominator());
+        int NewNominator = ( NewDenominator / this.denominator) * this.numerator - (NewDenominator / other.GetDenominator()) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
         return result;
     }
 
-    public Rational multiply(Rational other) {
-        int SemiNominator = this.numerator / gcd(this.numerator, this.denominator);
-        this.denominator = this.denominator / gcd(this.numerator, this.denominator);
-        SemiNominator = SemiNominator / gcd(SemiNominator, other.denominator);
-        other.denominator = other.denominator / gcd(SemiNominator, other.denominator);
-        int SecondSemiNominator = other.numerator / gcd(other.numerator, this.denominator);
-        this.denominator = this.denominator / gcd(other.numerator, this.denominator);
-        SecondSemiNominator = SecondSemiNominator / gcd(SecondSemiNominator, other.denominator);
-        other.denominator = other.denominator / gcd(SecondSemiNominator, other.denominator);
-        Rational result = new Rational(SemiNominator * SecondSemiNominator, other.denominator * this.denominator);
+    public Rational Multiply(Rational other) {
+        this.Simplify();
+        other.Simplify();
+        int NewNumerator = this.numerator*other.GetNumerator();
+        int NewDenominator = this.denominator*other.GetDenominator();
+        var result = new Rational(NewNumerator,NewDenominator);
+        result.Simplify();
         return result;
     }
 
-    public Rational divide(Rational other) {
-        int c = other.denominator;
-        other.denominator = other.numerator;
-        other.numerator = c;
-        int SemiNominator = this.numerator / gcd(this.numerator, this.denominator);
-        this.denominator = this.denominator / gcd(this.numerator, this.denominator);
-        SemiNominator = SemiNominator / gcd(SemiNominator, other.denominator);
-        other.denominator = other.denominator / gcd(SemiNominator, other.denominator);
-        int SecondSemiNominator = other.numerator / gcd(other.numerator, this.denominator);
-        this.denominator = this.denominator / gcd(other.numerator, this.denominator);
-        SecondSemiNominator = SecondSemiNominator / gcd(SecondSemiNominator, other.denominator);
-        other.denominator = other.denominator / gcd(SecondSemiNominator, other.denominator);
-        Rational result = new Rational(SemiNominator * SecondSemiNominator, other.denominator * this.denominator);
+    public Rational Divide(Rational other) {
+        this.Simplify();
+        other.Simplify();
+        int NewNumerator = this.numerator*other.GetDenominator();
+        int NewDenominator = this.denominator*other.GetNumerator();
+        var result = new Rational(NewNumerator,NewDenominator);
+        result.Simplify();
         return result;
     }
+    public int CompareTo(Rational other){
 
-    public int compareTo(Rational other) {
-        Rational ans = this.subtract(other);
-        if (ans.numerator < 0 || ans.denominator < 0) {
-            return -1;
-        }
-        if (ans.numerator > 0 && ans.denominator > 0) {
-            return 1;
-        }
-        return 0;
     }
-
-    public String toString() {
-        if (this.denominator == 0) {
-            throw new IllegalArgumentException("Invalid rational");
-        }
-        return Integer.toString(this.numerator) + "/" + Integer.toString(this.denominator);
+    public boolean IsLowerOrEqual(Rational other) {if (IsLower(other)==true || Equals(other)==true) {return true;} else return false;}
+    public boolean IsBiggerOrEqual(Rational other) {if (IsBigger(other)==true || Equals(other)==true) {return true;} else return false;}
+    public boolean Equals(Rational other){
+        Rational SubtractResult = this.Subtract(other);
+        if (SubtractResult.GetNumerator() == 0) {return false;} else return true;
     }
-
-    static Rational parseRational(String s) {
+    public boolean IsBigger(Rational other) {
+        Rational SubtractResult = this.Subtract(other);
+        if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return false;} else return true;
+    }
+    public boolean IsLower(Rational other) {
+        Rational SubtractResult = this.Subtract(other);
+        if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return true;} else return false;
+    }
+    static String toString(Rational InputRational) {
+        if (InputRational.denominator == 0) {
+            throw new NumberFormatException("Invalid rational");
+        }
+        return Integer.toString(InputRational.numerator) + "/" + Integer.toString(InputRational.denominator);
+    }
+    static boolean CheckSymbol(String InputSymbol){
+        if(SymbolList.contains(InputSymbol)){return true;} else{throw new IllegalArgumentException("'"+InputSymbol+"' is not a valid operator.");}
+    }
+    static Rational parseRational(String InputString) {
         Rational res ;
-        if (s.length() < 3) {
-            throw new IllegalArgumentException("Empty or partial input");
-        }
-        String[] in = s.split("/");
-        if (in.length > 2) {
-            throw new IllegalArgumentException("Too many arguments");
-        } else {
-            if (in.length == 1) {
-                throw new IllegalArgumentException("Missing denominator/numerator");
-            } else {
-                try {
-                    res = new Rational(Integer.parseInt(in[0]),Integer.parseInt(in[1]));
-                } catch (IllegalArgumentException ex) {
-                    throw new IllegalArgumentException("Incorrect numerator/denominator");
-                }
+        if (InputString.length() < 3) {throw new IllegalArgumentException("Empty or partial input");}
+        String[] in = InputString.split("/");
+        if (in.length > 2) {throw new IllegalArgumentException("Too many arguments");} else {
+            if (in.length == 1) {throw new IllegalArgumentException("Missing denominator/numerator");} else {
+                try {res = new Rational(Integer.parseInt(in[0]),Integer.parseInt(in[1]));}
+                catch (IllegalArgumentException ex) {throw new NumberFormatException("Incorrect numerator/denominator");}
             }
         }
         return res;
