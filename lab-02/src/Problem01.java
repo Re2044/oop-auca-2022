@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Problem02 {
+public class Problem01 {
     public static void main(String args[]) {
         Turtle[] TurtleArray = new Turtle[2];
         TurtleArray[0] = new Turtle("up", 0, 0, 0);

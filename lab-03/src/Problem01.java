@@ -28,7 +28,7 @@ public class Problem01 {
                 continue;
             }
             var Result = Rational.Operation(first,second,Symbol);
-            System.out.println(first.toString()+" "+Symbol+" "+second.toString()+" : "+Result);
+            System.out.println(Rational.toString(first)+" "+Symbol+" "+Rational.toString(second)+" : "+Result);
         }
     }
 }
