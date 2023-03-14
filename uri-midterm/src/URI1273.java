@@ -6,7 +6,6 @@ public class URI1273 {
         while(true){
             int len = in.nextInt();
             if(len==0){
-                System.out.println();
                 break;
             }
             String s = in.nextLine();
@@ -17,12 +16,8 @@ public class URI1273 {
                 maxx=Math.max(maxx,ans[i].length());
             }
             for(int i = 0;i<len;i++){
-                if(ans[i].length()<maxx){
-                    String plus = "";
-                    for(int j = 0;j<maxx-ans[i].length();j++)
-                        plus+=' ';
-                    ans[i] = plus +ans[i];
-                }
+                for(int j = 0;j<maxx-ans[i].length();j++)
+                    System.out.print(' ');
                 System.out.println(ans[i]);
             }
             System.out.println();
