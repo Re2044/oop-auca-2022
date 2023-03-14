@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class URI1239 {
     public static void main(String args[]){
         Scanner in = new Scanner(System.in);
-
         while(in.hasNextLine()){
             String s = in.nextLine();
             boolean flag = false;
