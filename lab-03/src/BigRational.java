@@ -118,9 +118,9 @@ public class BigRational {
         String[] in = InputString.split("/");
         if (in.length != 2) {throw new IllegalArgumentException("Can't parse "+InputString+" as input.");}
         else{
-            try{Integer.parseInt(in[0]);}
+            try{new BigInteger(in[0]);}
             catch(IllegalArgumentException ex){throw new IllegalArgumentException("Incorrect numerator input");}
-            try{Integer.parseInt(in[1]);}
+            try{new BigInteger(in[1]);}
             catch(IllegalArgumentException ex){throw new IllegalArgumentException("Incorrect denominator input");}
             try {res = new BigRational(new BigInteger(in[0]),new BigInteger(in[1]));}
             catch (IllegalArgumentException ex) {throw new NumberFormatException(ex.getMessage());}
