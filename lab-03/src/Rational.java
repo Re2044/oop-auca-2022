@@ -7,6 +7,8 @@ public class Rational {
     private int numerator = 0;
     private int denominator = 0;
     static String Operation(Rational first, Rational second, String InputSymbol){
+        first.Simplify();
+        second.Simplify();
         int Compare = first.compareTo(second);
         switch(InputSymbol) {
             case "+":
@@ -48,18 +50,19 @@ public class Rational {
     public int GetNumerator(){return this.numerator;}
     public int GetDenominator(){return this.denominator;}
     public int gcd(int a, int  b) {
-        if (b == 0)
-            return a;
-        else
-            return gcd(b, a % b);
+        if (b == 0) return a;
+        else return gcd(b, a % b);
     }
     public int lcd(int a,int b){
         return (a*b)/gcd(a,b);
     }
     public void Simplify(){
         int GCD = gcd(this.denominator,this.numerator);
+       // if(numerator<0 && denominator<0){numerator=(-1)*numerator;denominator=(-1)*denominator;}
+        //else if(numerator>0 && denominator<0){numerator=(-1)*numerator;denominator=(-1)*denominator;}
         this.ChangeNumerator(this.numerator/GCD);
         this.ChangeDenominator(this.denominator/GCD);
+        if(numerator>0 && denominator<0){this.ChangeNumerator((-1)*numerator);this.ChangeDenominator(-1*denominator);}
     }
     public Rational(int numerator, int denominator) {
         this.numerator = numerator;
@@ -67,12 +70,14 @@ public class Rational {
             throw new IllegalArgumentException("The denominator can't be equal to zero");
         }
         this.denominator = denominator;
+        this.Simplify();
     }
 
     public Rational add(Rational other) {
         int NewDenominator = lcd(this.denominator,other.GetDenominator());
         int NewNominator = (  NewDenominator/this.denominator ) * this.numerator + ( NewDenominator/other.GetDenominator() ) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
+        result.Simplify();
         return result;
     }
 
@@ -80,6 +85,7 @@ public class Rational {
         int NewDenominator = lcd(this.denominator, other.GetDenominator());
         int NewNominator = ( NewDenominator / this.denominator) * this.numerator - (NewDenominator / other.GetDenominator()) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
+        result.Simplify();
         return result;
     }
 

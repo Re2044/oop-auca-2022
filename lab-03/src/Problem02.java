@@ -1,13 +1,15 @@
+import java.math.BigInteger;
 import java.util.Scanner;
 
-public class Problem01 {
+public class Problem02 {
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
         while (true) {
             System.out.print("First rational: ");
-            String FirstRational = in.nextLine();
-            Rational first = new Rational(1, 1);
-            try {first = Rational.parseRational(FirstRational);}
+            String FirstBigRational = in.nextLine();
+            BigInteger BigOne = new BigInteger("1");
+            BigRational first = new BigRational(BigOne, BigOne);
+            try {first = BigRational.parseBigRational(FirstBigRational);}
             catch (IllegalArgumentException ex) {
                 System.err.println("Error: "+ex.getMessage());
                 System.out.println();
@@ -15,25 +17,24 @@ public class Problem01 {
             }
             System.out.print("Operator: ");
             String Symbol = in.nextLine();
-            try{Rational.CheckSymbol(Symbol);}
+            try{BigRational.CheckSymbol(Symbol);}
             catch (IllegalArgumentException ex){
                 System.err.println("Error: "+ex.getMessage());
                 System.out.println();
                 continue;
             }
             System.out.print("Second rational: ");
-            String SecondRational = in.nextLine();
-            Rational second = new Rational(1,1);
-            try {second = Rational.parseRational(SecondRational);}
+            String SecondBigRational = in.nextLine();
+            BigRational second = new BigRational(BigOne,BigOne);
+            try {second = BigRational.parseBigRational(SecondBigRational);}
             catch (IllegalArgumentException ex) {
                 System.err.println("Error: "+ex.getMessage());
                 System.out.println();
                 continue;
             }
-            var Result = Rational.Operation(first,second,Symbol);
+            var Result = BigRational.Operation(first,second,Symbol);
 
-            System.out.println("Result: "+Rational.toString(first)+" "+Symbol+" "+Rational.toString(second)+" : "+Result);
+            System.out.println("Result: "+BigRational.toString(first)+" "+Symbol+" "+BigRational.toString(second)+" : "+Result);
         }
     }
 }
-
