@@ -30,7 +30,7 @@ public class URI1873 {
             k.put("spock pedra",true);
             k.put("pedra spock",false);
             k.put("pedra tesoura",true);
-            k.put("tesoura pedro",false);
+            k.put("tesoura pedra",false);
             if(ins[0].equals(ins[1])){
                 System.out.println("empate");
             }
