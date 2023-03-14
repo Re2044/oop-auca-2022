@@ -5,7 +5,7 @@ public class ArrayListInt {
     public int size(){return this.size;}
     public int get(int index){return val[index];}
     public void set(int index,int value){val[index]=value;}
-    public void add(int value){if(size+1>capacity){ ExtendArray();size++;val[size-1]=value;}}
+    public void add(int value){if(size+1>capacity){ ExtendArray();}size++;val[size-1]=value;}
     public void add(int index,int value){
         if(size+1>capacity){
             size++;
