@@ -10,6 +10,7 @@ public class Problem01 {
             try {first = Rational.parseRational(FirstRational);}
             catch (IllegalArgumentException ex) {
                 System.err.println("Error: "+ex);
+                System.out.println();
                 continue;
             }
             System.out.print("Operator: ");
@@ -17,18 +18,20 @@ public class Problem01 {
             try{Rational.CheckSymbol(Symbol);}
             catch (IllegalArgumentException ex){
                 System.err.println("Error: "+ex);
+                System.out.println();
                 continue;
             }
             System.out.print("Second rational: ");
             String SecondRational = in.nextLine();
-            Rational second = new Rational(1, 1);
+            Rational second = new Rational(1,1);
             try {second = Rational.parseRational(SecondRational);}
             catch (IllegalArgumentException ex) {
                 System.err.println("Error: "+ex);
+                System.out.println();
                 continue;
             }
             var Result = Rational.Operation(first,second,Symbol);
-            System.out.println(Rational.toString(first)+" "+Symbol+" "+Rational.toString(second)+" : "+Result);
+            System.out.println("Result: "+Rational.toString(first)+" "+Symbol+" "+Rational.toString(second)+" : "+Result);
         }
     }
 }

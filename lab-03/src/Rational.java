@@ -64,7 +64,7 @@ public class Rational {
     public Rational(int numerator, int denominator) {
         this.numerator = numerator;
         if (denominator == 0) {
-            throw new IllegalArgumentException("Incorrect denominator input");
+            throw new IllegalArgumentException("The denominator can't be equal to zero");
         }
         this.denominator = denominator;
     }
@@ -123,9 +123,6 @@ public class Rational {
         if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return true;} else return false;
     }
     static String toString(Rational InputRational) {
-        if (InputRational.denominator == 0) {
-            throw new NumberFormatException("Invalid rational");
-        }
         return Integer.toString(InputRational.numerator) + "/" + Integer.toString(InputRational.denominator);
     }
     static boolean CheckSymbol(String InputSymbol){
@@ -133,15 +130,19 @@ public class Rational {
     }
     static Rational parseRational(String InputString) {
         Rational res ;
-        if (InputString.length() < 3) {throw new IllegalArgumentException("Empty or partial input");}
+        if (InputString.length() ==0) {throw new IllegalArgumentException("Empty input");}
         String[] in = InputString.split("/");
-        if (in.length > 2) {throw new IllegalArgumentException("Too many arguments");} else {
-            if (in.length == 1) {throw new IllegalArgumentException("Missing denominator/numerator");} else {
+        if (in.length != 2) {throw new IllegalArgumentException("Can't parse "+InputString+" as input.");}
+            else{
+                try{Integer.parseInt(in[0]);}
+                catch(IllegalArgumentException ex){throw new IllegalArgumentException("Incorrect numerator input");}
+                try{Integer.parseInt(in[1]);}
+                catch(IllegalArgumentException ex){throw new IllegalArgumentException("Incorrect denominator input");}
                 try {res = new Rational(Integer.parseInt(in[0]),Integer.parseInt(in[1]));}
-                catch (IllegalArgumentException ex) {throw new NumberFormatException("Incorrect numerator/denominator");}
+                catch (IllegalArgumentException ex) {throw new NumberFormatException(ex.getMessage());}
+                return res;
             }
         }
-        return res;
+
     }
-}
 
