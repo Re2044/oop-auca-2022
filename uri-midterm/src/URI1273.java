@@ -5,8 +5,10 @@ public class URI1273 {
         Scanner in = new Scanner(System.in);
         while(true){
             int len = in.nextInt();
-            if(len==0)
+            if(len==0){
+                System.out.println();
                 break;
+            }
             String s = in.nextLine();
             String[] ans = new String[len];
             int maxx = -1;
