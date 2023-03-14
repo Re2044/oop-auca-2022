@@ -32,9 +32,14 @@ public class Problem02 {
                 System.out.println();
                 continue;
             }
-            var Result = BigRational.Operation(first,second,Symbol);
+            try{var Result = BigRational.Operation(first,second,Symbol);
+                System.out.println("Result: "+BigRational.toString(first)+" "+Symbol+" "+BigRational.toString(second)+" : "+Result);}
+            catch (NumberFormatException ex){
+                System.err.println("Error: "+ex.getMessage());
+                System.out.println();
+                continue;
+            }
 
-            System.out.println("Result: "+BigRational.toString(first)+" "+Symbol+" "+BigRational.toString(second)+" : "+Result);
         }
     }
 }

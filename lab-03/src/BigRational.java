@@ -96,6 +96,9 @@ public class BigRational {
     public BigRational divide(BigRational other) {
         this.Simplify();
         other.Simplify();
+        if(other.numerator.equals(BigZero)){
+            throw new NumberFormatException("Division by zero is not allowed");
+        }
         BigInteger NewNumerator = this.numerator.multiply(other.GetDenominator());
         var NewDenominator = this.denominator.multiply(other.GetNumerator());
         var result = new BigRational(NewNumerator,NewDenominator);
