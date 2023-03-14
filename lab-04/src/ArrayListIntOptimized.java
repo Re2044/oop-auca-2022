@@ -1,11 +1,11 @@
 public class ArrayListIntOptimized {
-    private int[] val = new int[0];
-    private int capacity = 0;
+    private int[] val = new int[1];
+    private int capacity = 1;
     private int size = 0;
     public int size(){return this.size;}
     public int get(int index){return val[index];}
     public void set(int index,int value){val[index]=value;}
-    public void add(int value){if(size+1>capacity){ ExtendArray();val[size-1]=value;}}
+    public void add(int value){if(size+1>capacity){ ExtendArray();size++;val[size-1]=value;}}
     public void add(int index,int value){
         if(size+1>capacity){
             size++;
