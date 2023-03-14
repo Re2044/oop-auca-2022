@@ -49,17 +49,15 @@ public class Rational {
     }
     public int GetNumerator(){return this.numerator;}
     public int GetDenominator(){return this.denominator;}
-    public int gcd(int a, int  b) {
+    private int gcd(int a, int  b) {
         if (b == 0) return a;
         else return gcd(b, a % b);
     }
-    public int lcd(int a,int b){
+    private int lcd(int a,int b){
         return (a*b)/gcd(a,b);
     }
-    public void Simplify(){
+    private void Simplify(){
         int GCD = gcd(this.denominator,this.numerator);
-       // if(numerator<0 && denominator<0){numerator=(-1)*numerator;denominator=(-1)*denominator;}
-        //else if(numerator>0 && denominator<0){numerator=(-1)*numerator;denominator=(-1)*denominator;}
         this.ChangeNumerator(this.numerator/GCD);
         this.ChangeDenominator(this.denominator/GCD);
         if(numerator>0 && denominator<0){this.ChangeNumerator((-1)*numerator);this.ChangeDenominator(-1*denominator);}
@@ -113,20 +111,6 @@ public class Rational {
         if (Answer.GetNumerator()*Answer.GetDenominator()<0) {return -1;}
         else if (Answer.GetNumerator()*Answer.GetDenominator()>0) {return 1;}
         else return 0;
-    }
-    public boolean IsLowerOrEqual(Rational other) {if (IsLower(other)==true || Equals(other)==true) {return true;} else return false;}
-    public boolean IsBiggerOrEqual(Rational other) {if (IsBigger(other)==true || Equals(other)==true) {return true;} else return false;}
-    public boolean Equals(Rational other){
-        Rational SubtractResult = this.subtract(other);
-        if (SubtractResult.GetNumerator() == 0) {return false;} else return true;
-    }
-    public boolean IsBigger(Rational other) {
-        Rational SubtractResult = this.subtract(other);
-        if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return false;} else return true;
-    }
-    public boolean IsLower(Rational other) {
-        Rational SubtractResult = this.subtract(other);
-        if (SubtractResult.GetNumerator() * SubtractResult.GetDenominator() < 0) {return true;} else return false;
     }
     static String toString(Rational InputRational) {
         return Integer.toString(InputRational.numerator) + "/" + Integer.toString(InputRational.denominator);

@@ -51,13 +51,11 @@ public class BigRational {
     public BigInteger GetNumerator(){return this.numerator;}
     public BigInteger GetDenominator(){return this.denominator;}
 
-    public BigInteger lcd(BigInteger a,BigInteger b){
+    private BigInteger lcd(BigInteger a,BigInteger b){
         return (a.multiply(b)).divide(a.gcd(b));
     }
     public void Simplify(){
         BigInteger GCD = this.denominator.gcd(this.numerator);
-        // if(numerator<0 && denominator<0){numerator=(-1)*numerator;denominator=(-1)*denominator;}
-        //else if(numerator>0 && denominator<0){numerator=(-1)*numerator;denominator=(-1)*denominator;}
         this.ChangeNumerator(this.numerator.divide(GCD));
         this.ChangeDenominator(this.denominator.divide(GCD));
         if(numerator.compareTo(BigZero)==1 && denominator.compareTo(BigZero)==-1){this.ChangeNumerator(numerator.negate());this.ChangeDenominator(denominator.negate());}
