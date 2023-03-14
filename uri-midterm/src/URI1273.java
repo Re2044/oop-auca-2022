@@ -23,6 +23,7 @@ public class URI1273 {
                 }
                 System.out.println(ans[i]);
             }
+            System.out.println();
         }
     }
 }
