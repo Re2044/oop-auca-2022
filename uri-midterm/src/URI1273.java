@@ -13,10 +13,11 @@ public class URI1273 {
             int maxx = -1;
             for(int i= 0 ;i<len;i++){
                 ans[i] = in.nextLine();
-                maxx=Math.max(maxx,ans[i].length());
+                if(ans[i].length()>maxx)
+                    maxx=ans[i].length();
             }
             for(int i = 0;i<len;i++){
-                for(int j = 0;j<maxx-ans[i].length();j++)
+                for(int j = ans[i].length();j<maxx;j++)
                     System.out.print(' ');
                 System.out.println(ans[i]);
             }
