@@ -18,7 +18,7 @@ public class URI1273 {
                 if(ans[i].length()<maxx){
                     String plus = "";
                     for(int j = 0;j<maxx-ans[i].length();j++)
-                        plus+=" ";
+                        plus+=' ';
                     ans[i] = plus +ans[i];
                 }
                 System.out.println(ans[i]);
