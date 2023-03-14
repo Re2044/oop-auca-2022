@@ -14,22 +14,20 @@ public class URI2253 {
                 boolean dig = false;
                 boolean up = false;
                 boolean down = false;
-                if (Pattern.matches("\\p{Punct}",pass )){
-                    flag=false;
-                }
+
                 for(int i =0 ;i<pass.length();i++){
-                    if(pass.charAt(i) ==' '){
-                        flag=false;
-                        break;
-                    }
                     if(Character.isDigit(pass.charAt(i))){
                         dig = true;
                     }
-                    if(Character.isLowerCase(pass.charAt(i))){
+                    else if(Character.isLowerCase(pass.charAt(i))){
                         down = true;
                     }
-                    if(Character.isUpperCase(pass.charAt(i))){
+                    else if(Character.isUpperCase(pass.charAt(i))){
                         up = true;
+                    }
+                    else {
+                        flag= false;
+                        break;
                     }
                 }
                 if(flag==true && up==true && dig==true && down==true){
