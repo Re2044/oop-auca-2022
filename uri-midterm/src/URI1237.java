@@ -13,7 +13,6 @@ public class URI1237 {
                     String subst = first.substring(j,j+i);
                     if(second.contains(subst)){
                         res = Math.max(res,i);
-                        break;
                     }
                 }
             }
