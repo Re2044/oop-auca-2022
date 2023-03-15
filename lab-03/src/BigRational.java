@@ -51,11 +51,8 @@ public class BigRational {
     public BigInteger GetNumerator(){return this.numerator;}
     public BigInteger GetDenominator(){return this.denominator;}
 
-    private BigInteger lcd(BigInteger a,BigInteger b){
-        return (a.multiply(b)).divide(a.gcd(b));
-    }
     public void Simplify(){
-        BigInteger GCD = this.denominator.gcd(this.numerator);
+        BigInteger GCD = MyCommonMath.gcd(this.numerator,this.numerator);
         this.ChangeNumerator(this.numerator.divide(GCD));
         this.ChangeDenominator(this.denominator.divide(GCD));
         if(numerator.compareTo(BigZero)==1 && denominator.compareTo(BigZero)==-1){this.ChangeNumerator(numerator.negate());this.ChangeDenominator(denominator.negate());}
@@ -70,14 +67,14 @@ public class BigRational {
     }
 
     public BigRational add(BigRational other) {
-        BigInteger NewDenominator = lcd(this.denominator,other.GetDenominator());
+        BigInteger NewDenominator = MyCommonMath.lcd(this.denominator,other.GetDenominator());
         BigInteger NewNominator =((NewDenominator.divide(this.denominator)).multiply(this.numerator)).add(( NewDenominator.divide(other.GetDenominator()) ).multiply( other.GetNumerator()));
         BigRational result = new BigRational(NewNominator, NewDenominator);
         result.Simplify();
         return result;
     }
     public BigRational subtract(BigRational other) {
-        BigInteger NewDenominator = lcd(this.denominator, other.GetDenominator());
+        BigInteger NewDenominator = MyCommonMath.lcd(this.denominator, other.GetDenominator());
         BigInteger NewNominator = ( NewDenominator.divide(this.denominator)).multiply(this.numerator).subtract(NewDenominator.divide(other.GetDenominator()).multiply(other.GetNumerator()));
         BigRational result = new BigRational(NewNominator, NewDenominator);
         result.Simplify();

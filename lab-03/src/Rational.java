@@ -49,15 +49,10 @@ public class Rational {
     }
     public int GetNumerator(){return this.numerator;}
     public int GetDenominator(){return this.denominator;}
-    private int gcd(int a, int  b) {
-        if (b == 0) return a;
-        else return gcd(b, a % b);
-    }
-    private int lcd(int a,int b){
-        return (a*b)/gcd(a,b);
-    }
+
+
     private void Simplify(){
-        int GCD = gcd(this.denominator,this.numerator);
+        int GCD = MyCommonMath.gcd(this.denominator,this.numerator);
         this.ChangeNumerator(this.numerator/GCD);
         this.ChangeDenominator(this.denominator/GCD);
         if(numerator>0 && denominator<0){this.ChangeNumerator((-1)*numerator);this.ChangeDenominator(-1*denominator);}
@@ -72,7 +67,7 @@ public class Rational {
     }
 
     public Rational add(Rational other) {
-        int NewDenominator = lcd(this.denominator,other.GetDenominator());
+        int NewDenominator = MyCommonMath.lcd(this.denominator,other.GetDenominator());
         int NewNominator = (  NewDenominator/this.denominator ) * this.numerator + ( NewDenominator/other.GetDenominator() ) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
         result.Simplify();
@@ -80,7 +75,7 @@ public class Rational {
     }
 
     public Rational subtract(Rational other) {
-        int NewDenominator = lcd(this.denominator, other.GetDenominator());
+        int NewDenominator = MyCommonMath.lcd(this.denominator, other.GetDenominator());
         int NewNominator = ( NewDenominator / this.denominator) * this.numerator - (NewDenominator / other.GetDenominator()) * other.GetNumerator();
         Rational result = new Rational(NewNominator, NewDenominator);
         result.Simplify();
