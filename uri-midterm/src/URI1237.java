@@ -16,6 +16,7 @@ public class URI1237 {
                        // System.out.println(subst + " " +sub);
                         if(subst.equals(sub)){
                             res = Math.max(res,i);
+                            break;
                         }
                     }
                 }
