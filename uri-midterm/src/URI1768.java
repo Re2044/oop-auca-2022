@@ -14,7 +14,7 @@ public class URI1768 {
                 System.out.println();
             }
             else {
-                for(int i = 1;i<=x;i+=2){
+                for(int i = 0;i<x;i+=2){
                     for(int j = 0;j<(x-i)/2;j++){
                         System.out.print(" ");
                     }
@@ -26,11 +26,11 @@ public class URI1768 {
                     }
                     System.out.println();
                 }
-                for(int j = 0;j<(x-1)/2;j++){
+                for(int j = 1;j<=x/2;j++){
                     System.out.print(" ");
                 }
                 System.out.print("*");
-                for(int j = 0;j<(x-1)/2;j++){
+                for(int j = 1;j<=x/2;j++){
                     System.out.print(" ");
                 }
                 System.out.println();
