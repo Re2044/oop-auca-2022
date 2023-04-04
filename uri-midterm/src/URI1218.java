@@ -25,7 +25,7 @@ public class URI1218 {
             System.out.println("Pares Iguais: "+(cntf+cntm));
             System.out.println("F: "+cntf);
             System.out.println("M: "+cntm);
-            System.out.println();
+            //System.out.println();
             i++;
         }
     }
