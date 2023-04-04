@@ -6,6 +6,7 @@ public class Rational {
     private static List<String> SymbolList = List.of("+","-","/","*",">=","<=","!=","=",">","<");
     private int numerator = 0;
     private int denominator = 0;
+
     static String Operation(Rational first, Rational second, String InputSymbol){
         first.Simplify();
         second.Simplify();

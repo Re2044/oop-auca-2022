@@ -10,7 +10,7 @@ public class URI1245 {
             int[] right = new int[31];
             int[] left = new int[31];
             for(int i = 0 ; i <len;i++){
-                int size = in.nextInt();
+                int size = in.nextInt();    
                 char leg =in.next().charAt(0);
                 if(leg=='D'){
                     right[size-30]++;

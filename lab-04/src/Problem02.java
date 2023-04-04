@@ -29,7 +29,7 @@ public class Problem02 {
                 array.add(x);
             }
             catch(Exception ex){
-                break;
+                break; 
             }
 
 
