@@ -9,6 +9,7 @@ public class URI1768 {
             int x = Integer.parseInt(in.nextLine());
             if(x==1){
                 System.out.println(" * ");
+                System.out.println(" * ");
                 System.out.println("***");
                 System.out.println();
             }
