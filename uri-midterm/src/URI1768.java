@@ -1,10 +1,17 @@
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class URI1768 {
     public static  void main(String args[]){
         Scanner in = new Scanner(System.in);
         while(in.hasNextLine()){
-            int x = in.nextInt();
+            int x;
+            try{
+                x = in.nextInt();
+            }catch (NoSuchElementException ex){
+                break;
+            }
+
             for(int i = 1;i<=x;i+=2){
                 for(int j = 0;j<(x-i)/2;j++){
                     System.out.print(" ");
