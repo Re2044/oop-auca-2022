@@ -6,17 +6,7 @@ public class URI1768 {
         Scanner in = new Scanner(System.in);
         int k = 0;
         while(in.hasNextLine()){
-            int x;
-            try{
-
-                x = in.nextInt();
-                if(k!=0)
-                    System.out.println();
-                else
-                    k=1;
-            }catch (NoSuchElementException ex){
-                break;
-            }
+            int x = Integer.parseInt(in.nextLine());
 
             for(int i = 1;i<=x;i+=2){
                 for(int j = 0;j<(x-i)/2;j++){
@@ -46,7 +36,7 @@ public class URI1768 {
                 System.out.print(" ");
             }
             System.out.println();
-
+            System.out.println();
         }
     }
 }
