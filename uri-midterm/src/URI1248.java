@@ -10,7 +10,7 @@ public class URI1248 {
             String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             int [] cnt = new int[28];
             for(int j = 0;j<26;j++){
-                cnt[i] = 0;
+                cnt[j] = 0;
             }
             String a = in.nextLine();
             for(int j = 0;j<a.length();j++){
