@@ -6,45 +6,31 @@ public class URI1768 {
         Scanner in = new Scanner(System.in);
         int k = 0;
         while(in.hasNextLine()){
-            int x = Integer.parseInt(in.nextLine());
-            if(x==1){
-                System.out.println(" * ");
-                System.out.println(" * ");
-                System.out.println("***");
-                System.out.println();
-            }
-            else {
-                for(int i = 0;i<x;i+=2){
-                    for(int j = 0;j<(x-i)/2;j++){
-                        System.out.print(" ");
-                    }
-                    for(int j = 0;j<i;j++){
-                        System.out.print("*");
-                    }
-                    for(int j = 0;j<(x-i)/2;j++){
-                        System.out.print(" ");
-                    }
-                    System.out.println();
-                }
-                for(int j = 1;j<=x/2;j++){
+            int l = Integer.parseInt(in.nextLine());
+            int x = l/2+1;
+            for(int i = 1;i<=x;i++){
+                for(int j = i-1;j<l/2;j++){
                     System.out.print(" ");
                 }
-                System.out.print("*");
-                for(int j = 1;j<=x/2;j++){
-                    System.out.print(" ");
+                int r = 2*i-1;
+                for(int j = 1;j<=r;j++){
+                    System.out.print("*");
                 }
-                System.out.println();
-                for(int j = 0;j<(x-3)/2;j++){
-                    System.out.print(" ");
-                }
-                System.out.print("***");
-                for(int j = 0;j<(x-3)/2;j++){
-                    System.out.print(" ");
-                }
-                System.out.println();
-                System.out.println();
-            }
 
+                System.out.println();
+            }
+            for(int j = 1;j<=l/2;j++){
+                System.out.print(" ");
+            }
+            System.out.println("*");
+            for(int j = 0;j<(l-3)/2;j++){
+                System.out.print(" ");
+            }
+            System.out.println("***");
+
+            System.out.println();
         }
+
+
     }
 }
