@@ -14,7 +14,7 @@ public class URI1217 {
             int len = (fruits.split(" ")).length;
             much+=len;
             sum+=amount;
-            System.out.println("day 1: "+len+" kg");
+            System.out.println("day "+i+": "+len+" kg");
         }
         System.out.println(Math.round(((double) much/n)*100.0)/100.0+" kg by day");
         System.out.println("R$ "+Math.round(((double) sum/n)*100.0)/100.0+" by day");
