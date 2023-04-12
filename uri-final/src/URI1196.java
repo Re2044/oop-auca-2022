@@ -8,19 +8,15 @@ public class URI1196 {
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
         String qwe = "`1234567890-=QWERTYUIOP[]\\\\ASDFGHJKL;'ZXCVBNM,./";
-        Map<Character,Integer> dict= new HashMap<Character,Integer>();
-
-        for(int i = 0 ;i<qwe.length();i++){
-            dict.put(qwe.charAt(i),i);
-        }
-        String res = "";
         for (int i = 0 ;i<s.length();i++){
-            if(s.charAt(i)!=' '){
-                res+=qwe.charAt(dict.get(s.charAt(i))-1);
+            int index = qwe.indexOf(s.charAt(i));
+            if(index!=-1){
+                System.out.print(qwe.charAt(index-1));
             }
-            else
-                res+=" ";
+            else{
+                System.out.print(s.charAt(i));
+            }
         }
-        System.out.println(res);
+
     }
 }
