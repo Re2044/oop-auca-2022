@@ -9,7 +9,7 @@ public class URI1632 {
             String curr = in.nextLine();
             int ans = 1;
             for(int i = 0;i<curr.length();i++){
-                if(Character.toUpperCase(curr.charAt(i))=='A' || Character.toUpperCase(curr.charAt(i))=='E' || Character.toUpperCase(curr.charAt(i))=='I' || Character.toUpperCase(curr.charAt(i))=='O'){
+                if(Character.toUpperCase(curr.charAt(i))=='A' || Character.toUpperCase(curr.charAt(i))=='E' || Character.toUpperCase(curr.charAt(i))=='I' || Character.toUpperCase(curr.charAt(i))=='O' || Character.toUpperCase(curr.charAt(i))=='S'){
                     ans = ans *3;
                 }
                 else
