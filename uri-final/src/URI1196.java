@@ -7,7 +7,7 @@ public class URI1196 {
     public static void main(String args[]){
         Scanner in = new Scanner(System.in);
         String s = in.nextLine();
-        String qwe = "`1234567890-=QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./";
+        String qwe = "`1234567890-=QWERTYUIOP[]\\\\ASDFGHJKL;'ZXCVBNM,./";
         Map<Character,Integer> dict= new HashMap<Character,Integer>();
 
         for(int i = 0 ;i<qwe.length();i++){
