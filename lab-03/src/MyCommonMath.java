@@ -12,7 +12,6 @@ public class MyCommonMath {
         else return gcd(b, a % b);
     }
     public static BigInteger gcd(BigInteger a,BigInteger b){
-        if (b.equals("0")) return a;
-        else return gcd(b, a.mod(b));
+        return a.gcd(b);
     }
 }

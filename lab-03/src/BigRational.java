@@ -52,7 +52,7 @@ public class BigRational {
     public BigInteger GetDenominator(){return this.denominator;}
 
     public void Simplify(){
-        BigInteger GCD = MyCommonMath.gcd(this.numerator,this.numerator);
+        BigInteger GCD = MyCommonMath.gcd(this.numerator,this.denominator);
         this.ChangeNumerator(this.numerator.divide(GCD));
         this.ChangeDenominator(this.denominator.divide(GCD));
         if(numerator.compareTo(BigZero)==1 && denominator.compareTo(BigZero)==-1){this.ChangeNumerator(numerator.negate());this.ChangeDenominator(denominator.negate());}
