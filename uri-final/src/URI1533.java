@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class URI1533 {
     public static void main(String args[]){
@@ -8,16 +10,25 @@ public class URI1533 {
             int m = in.nextInt();
             if(len==0)
                 break;
-            int[] k = new int [10001];
-            int ans = 0;
 
-            for(int i = 0 ; i < m;i++){
+            int ans = 0;
+            int maxx = -1;
+            int ansx = 0;
+            int prev = -1;
+            ArrayList<Integer>arr = new ArrayList<>();
+            for(int i = 0 ; i < len;i++){
                 int x = in.nextInt();
-                k[x]++;
-            }
-            for(var i = 1;i<=len;i++){
-                if(k[i]>1){
-                    ans++;
+                if(x>maxx){
+                    int c = maxx;
+                    int t = ansx;
+                    ansx = i+1;
+                    maxx = x;
+                    prev = c;
+                    ans = t;
+                }
+                else if(x>prev){
+                    prev = x;
+                    ans = i+1;
                 }
             }
             System.out.println(ans);
