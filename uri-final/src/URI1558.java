@@ -14,11 +14,11 @@ public class URI1558 {
         while(in.hasNextLine()){
             try{
                 int n = in.nextInt();
-                if(isSquare[n]==true){
-                    System.out.println("Yes");
+                if(n>=0 && isSquare[n]==true){
+                    System.out.println("YES");
                 }
                 else
-                    System.out.println("No");
+                    System.out.println("NO");
             }
             catch (NoSuchElementException ex){
                 break;
