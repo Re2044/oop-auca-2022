@@ -14,7 +14,7 @@ public class URI1558 {
         while(in.hasNextLine()){
             try{
                 int n = in.nextInt();
-                if(n>=0 && isSquare[n]==true){
+                if(n>=0 && isSquare[n]){
                     System.out.println("YES");
                 }
                 else
