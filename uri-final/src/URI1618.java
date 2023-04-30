@@ -16,12 +16,8 @@ public class URI1618 {
             dy = in.nextInt();
             rx = in.nextInt();
             ry = in.nextInt();
-            if(rx>Math.min(ax,Math.min(bx,Math.min(cx,dx))) && rx<Math.max(ax,Math.max(bx,Math.max(cx,dx)))){
-                if(ry>Math.min(ay,Math.min(by,Math.min(cy,dy))) && ry<Math.max(ay,Math.max(by,Math.max(cy,dy)))){
-                    System.out.println(1);
-                }
-                else
-                    System.out.println(0);
+            if(rx >= ax && rx <= bx && rx >= dx && rx <= cx && ry >= ay && ry <= dy && ry >= by && ry <= cy){
+                System.out.println(1);
             }
             else
                 System.out.println(0);
