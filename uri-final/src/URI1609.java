@@ -1,4 +1,6 @@
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class URI1609 {
     public static void main(String args[]){
@@ -7,14 +9,12 @@ public class URI1609 {
         for(int i = 0 ;i<n;i++){
             int m = in.nextInt();
             int ans = 0;
-            int [] arr = new int[10001];
+            Set<Integer> arr = new HashSet<>();
             for(int j = 0 ;j<m;j++){
                 int k = in.nextInt();
-                arr[k]++;
-                if(arr[k]==1)
-                    ans++;
+                arr.add(k);
             }
-            System.out.println(ans);
+            System.out.println(arr.size());
         }
     }
 }
