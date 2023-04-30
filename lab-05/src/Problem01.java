@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.JFrame;
 public class Problem01 extends JFrame{
     Problem01(){
-        setTitle("First Swing App");
+        setTitle("First GUI App");
         setSize(400,400);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -12,7 +12,7 @@ public class Problem01 extends JFrame{
         JPanel mJPanel = new JPanel ();
         JPanel cJpanel = new JPanel();
         mJPanel.setBackground(Color.RED);
-        cJpanel.setBackground(Color.GRAY);
+        cJpanel.setBackground(Color.DARK_GRAY);
 
 
         add(mJPanel,BorderLayout.CENTER);

@@ -7,7 +7,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 public class Problem04 extends JFrame{
     Problem04(){
-        setTitle("First Swing App");
+        setTitle("Chessboard");
         setSize(400,400);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

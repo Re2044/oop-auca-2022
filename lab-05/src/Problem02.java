@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 public class Problem02 extends JFrame {
     Problem02(){
-        setTitle("First Swing App");
+        setTitle("First GUI App");
         setSize(400,400);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -15,7 +15,7 @@ public class Problem02 extends JFrame {
         JPanel mJPanel = new JPanel ();
         JPanel cJpanel = new JPanel();
         mJPanel.setBackground(Color.RED);
-        cJpanel.setBackground(Color.GRAY);
+        cJpanel.setBackground(Color.DARK_GRAY);
 
 
         add(mJPanel,BorderLayout.CENTER);

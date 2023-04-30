@@ -7,38 +7,28 @@ public class Problem05 extends JFrame{
     private int column = 0;
     private int row = 0;
     Problem05(){
-        setTitle("First Swing App");
+        setTitle("Move robot");
+        setLocationRelativeTo(null);
         setSize(400,400);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+
+
         var mJPanel = new CanvasPanel();
+        mJPanel.setFocusable(true);
+        this.add(mJPanel);
         mJPanel.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.equals(KeyEvent.VK_LEFT) && column!=0){
-                    column--;
-                }
-                if(e.equals(KeyEvent.VK_RIGHT)) {
-                    if (column != 7) {
-                        column++;
-                    }
-                }
-                if(e.equals(KeyEvent.VK_UP)){
-                    if(row!=0){
-                        row--;
-                    }
-                }
-                if(e.equals(KeyEvent.VK_DOWN)) {
-                    if (row != 7) {
-                        row--;
-                    }
-                }}
+                super.keyPressed(e);
+                if(e.getKeyCode()==KeyEvent.VK_LEFT && column>0) column--;
+                if(e.getKeyCode()==KeyEvent.VK_RIGHT && column<7) column++;
+                if(e.getKeyCode()==KeyEvent.VK_UP && row>0) row--;
+                if(e.getKeyCode()==KeyEvent.VK_DOWN && row<7) row++;
+                repaint();
+            }
         });
-        this.add(mJPanel);
-
-
-
     }
     class CanvasPanel extends JPanel{
         @Override
@@ -55,7 +45,6 @@ public class Problem05 extends JFrame{
                     g.fillRect(chessWidth*i,chessHeight*j,chessWidth,chessHeight);
                 }
             }
-
             g.setColor(Color.RED);
             g.fillOval(column*chessWidth,row*chessHeight,chessWidth,chessHeight);
         }

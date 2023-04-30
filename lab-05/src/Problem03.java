@@ -7,7 +7,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JFrame;
 public class Problem03 extends JFrame{
     Problem03(){
-        setTitle("First Swing App");
+        setTitle("Move mouse");
         setSize(400,400);
         setVisible(true);
 
