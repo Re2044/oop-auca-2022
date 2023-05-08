@@ -13,8 +13,6 @@ public class Problem05 extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
-
         var mJPanel = new CanvasPanel();
         mJPanel.setFocusable(true);
         this.add(mJPanel);
