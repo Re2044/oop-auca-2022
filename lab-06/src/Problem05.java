@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Problem05 extends JFrame {
     ArrayList<Shape> shapes = new ArrayList<>();
@@ -12,7 +13,7 @@ public class Problem05 extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel mJPanel = new JPanel ();
         JPanel cJpanel = new JPanel();
-        mJPanel.setBackground(Color.RED);
+        mJPanel.setBackground(Color.WHITE);
         cJpanel.setBackground(Color.DARK_GRAY);
 
 
@@ -26,9 +27,11 @@ public class Problem05 extends JFrame {
         cJpanel.add(RectJButton);
         cJpanel.add(CircleJButton);
         cJpanel.add(CrossJButton);
-        RectJButton.addActionListener(e -> {shapes.add(new Rectangle());
-        CircleJButton.addActionListener(e -> {mJPanel.setBackground(Color.GREEN);});
-        CrossJButton.addActionListener(e -> {mJPanel.setBackground(Color.BLUE);});
+        Random rand = new Random();
+        RectJButton.addActionListener(e -> {shapes.add(new Rectangle(rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100)));});
+        CircleJButton.addActionListener(e -> {shapes.add(new Circle(rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100)));});
+        CrossJButton.addActionListener(e -> {shapes.add(new Cross(new Rectangle(rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100)),new Rectangle(rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100),rand.nextInt(0,100))));});
+        System.out.println(shapes.size());
     }
     public static void main(String args[]){
         Problem05 curr  = new Problem05();

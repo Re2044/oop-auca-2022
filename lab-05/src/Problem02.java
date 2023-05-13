@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Problem02 extends JFrame {
     Problem02(){
@@ -37,5 +35,8 @@ public class Problem02 extends JFrame {
     }
     public static void main(String args[]){
         Problem02 window = new Problem02();
+    }
+
+    public static class Student {
     }
 }
