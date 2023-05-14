@@ -20,7 +20,7 @@ class Student implements MyComparable<Student> {
     }
     @Override
     public String toString(){
-        return "Problem02.Student{name='"+name+"', GPA="+GPA+", birthYear="+birthYear+"}";
+        return "Student{name='"+name+"', GPA="+GPA+", birthYear="+birthYear+"}";
     }
     @Override
     public int compareTo( Student a) {
