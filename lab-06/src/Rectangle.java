@@ -48,6 +48,11 @@ public class Rectangle extends Shape{
         }
     }
     @Override
+    public void moveShape(int x,int y){
+        this.xpos = this.xpos+x;
+        this.ypos = this.ypos+y;
+    }
+    @Override
     public String toString(){return "Rect: "+xpos +", "+ ypos+", "+width+", "+height;}
     @Override
     public void fill(Graphics g){

@@ -5,6 +5,8 @@ public abstract class Shape {
 
     public abstract void moveShape(int x,int y,int width,int height);
 
+    public abstract void moveShape(int x,int y);
+
     public abstract void fill(Graphics g);
 
     public static Shape SelectedShape = null;

@@ -37,7 +37,7 @@ public class Problem04 {
                     int y2 = in.nextInt();
                     for( var it : shapes){
                         if(it.contains(x1,y1)){
-                            it.moveShape(x2-x1,y2-y1,1920,1080);
+                            it.moveShape(x2-x1,y2-y1);
                             break;
                         }
                     }

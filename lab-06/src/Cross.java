@@ -47,6 +47,11 @@ public class Cross extends Shape{
             this.ypos = 0;
         }
     }
+    @Override
+    public void moveShape(int x,int y){
+        this.xpos = this.xpos+x;
+        this.ypos = this.ypos+y;
+    }
     public int getX() {return xpos;}
 
     public int getY(){return ypos;}

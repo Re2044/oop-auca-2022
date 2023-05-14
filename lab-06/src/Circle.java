@@ -35,6 +35,11 @@ public class Circle extends Shape {
         }
     }
     @Override
+    public void moveShape(int x,int y){
+        this.xpos = this.xpos+x;
+        this.ypos = this.ypos+y;
+    }
+    @Override
     public String toString(){return "Circle: "+xpos +", "+ ypos+", "+radius;}
     @Override
     public void fill(Graphics g){
