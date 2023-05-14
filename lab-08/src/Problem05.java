@@ -25,6 +25,7 @@ public class Problem05 {
         try(PrintWriter out = new PrintWriter(sourceFile)){
             for(int i = 0 ; i <a.size();i++){
                 out.append(a.get(i));
+                out.println();
             }
         }
     }
