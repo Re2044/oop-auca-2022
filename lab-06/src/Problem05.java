@@ -127,7 +127,6 @@ public class Problem05 extends JFrame {
         rectButton.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyCode());
                 if(e.getKeyCode()==KeyEvent.VK_DELETE && Shape.SelectedShape != null){
                     super.keyPressed(e);
                     shapes.remove(Shape.SelectedShape);
@@ -139,7 +138,6 @@ public class Problem05 extends JFrame {
         circleButton.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyCode());
                 if(e.getKeyCode()==KeyEvent.VK_DELETE && Shape.SelectedShape != null){
                     super.keyPressed(e);
                     shapes.remove(Shape.SelectedShape);
@@ -151,7 +149,6 @@ public class Problem05 extends JFrame {
         crossButton.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyCode());
                 if(e.getKeyCode()==KeyEvent.VK_DELETE && Shape.SelectedShape != null){
                     super.keyPressed(e);
                     shapes.remove(Shape.SelectedShape);
