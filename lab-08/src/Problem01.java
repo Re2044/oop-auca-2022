@@ -16,6 +16,8 @@ public class Problem01 {
                 System.out.println("Try again. (" +"Incorrect input: an integer is required)");
                 in.nextLine();
             }
+
+
         }
     }
 }

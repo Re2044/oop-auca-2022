@@ -1,6 +1,8 @@
+import java.awt.*;
 
-interface MyComparable<Object>{
+interface MyComparable<Object> {
     int compareTo(Object a);
+
 }
 interface MyComparator<Object> {
     int compare(Object a,Object b);

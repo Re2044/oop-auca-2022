@@ -1,7 +1,7 @@
 import java.math.BigInteger;
 import java.util.List;
 
-public class BigRational implements Comparable {
+public class BigRational implements MyComparable {
     private static List<String> SymbolList = List.of("+","-","/","*",">=","<=","!=","=",">","<");
     private BigInteger BigZero = new BigInteger("0");
     private BigInteger numerator = BigZero;
