@@ -1,36 +1,47 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+
+import static java.awt.font.GraphicAttribute.ROMAN_BASELINE;
 
 public class Main extends JFrame {
-    int column = 0;
-    int row = 0;
-    int length = 8;
-    int rowCount = 20;
-    int columnCount = 20;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 800;
+    public void addCompToPane(Container p){
+
+        cards = new JPanel(new CardLayout());
+
+        var mJPanel = new Field();
+        mJPanel.setFocusable(true);
+        var StartButton = new JButton("Start the Game");
+        StartButton.setFont();
+        mJPanel.setBackground(Color.BLACK);
+
+        var cJPanel = new JPanel();
+        cJPanel.setBackground(Color.DARK_GRAY);
+
+
+        cards.add(mJPanel, "card 1");
+        cards.add(cJPanel, "card 2");
+
+        p.add(cards,BorderLayout.CENTER);
+    }
+    JPanel cards;
     Main(){
+        setTitle("Wise snake devouring golden apples in the magic world");
+        setLocationRelativeTo(null);
+        setSize(WIDTH,HEIGHT);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addCompToPane(this.getContentPane());
+        this.pack();
 
     }
-    class SnakeField extends JPanel{
-        @Override
-        protected void paintComponent(Graphics g){
-            super.paintComponent(g);
-            int chessWidth = this.getWidth()/rowCount;
-            int chessHeight = this.getHeight()/columnCount;
-            for(int i = 0;i<rowCount;i++){
-                for(int j = 0;j<columnCount;j++){
-                    if((i+j)%2==0)
-                        g.setColor(Color.BLACK);
-                    else
-                        g.setColor(Color.WHITE);
-                    g.fillRect(chessWidth*i,chessHeight*j,chessWidth,chessHeight);
-                }
-            }
-            g.setColor(Color.RED);
-            g.fillOval(column*chessWidth,row*chessHeight,chessWidth,chessHeight);
-        }
 
-    }
+
     public static void main(String[] args) {
          new Main().setVisible(true);
     }
+
+
 }
