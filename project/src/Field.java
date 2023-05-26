@@ -2,10 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Field  extends JPanel {
-    private int rowCount = 20;
-    private int columnCount = 20;
-    private int column = 0;
-    private int row = 0;
+    private Apple MyApple;
+
+    private Snake MySnake;
+    private int rowCount;
+    private int columnCount;
+    public Field(int rowCount,int columnCount){
+
+    }
+    public int getRow(){
+        return rowCount;
+    }
+    public int getCol(){
+        return columnCount;
+    }
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
