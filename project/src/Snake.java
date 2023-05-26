@@ -17,7 +17,7 @@ public class Snake {
         arrayCol.add(0);
         length = 1;
     }
-    public void Paint(Graphics g, int width, int height){
+    public void draw(Graphics g, int width, int height){
         g.setColor(color);
         for(int i = 0; i<arrayRow.size();i++)   {
             int col = arrayCol.get(i);

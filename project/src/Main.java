@@ -10,11 +10,28 @@ public class Main extends JFrame {
 
     public static final int numberOfColumns = 20;
     public static final int numberOfRows = 20;
+
+    private static Field MyField;
+    class Canvas extends JPanel{
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            int canvasWidth = this.getWidth()/MyField.getCol();
+            int canvasHeight = this.getHeight()/MyField.getRow();
+            for(int i = 0;i<MyField.getRow();i++){
+                for(int j = 0;j<MyField.getCol();j++){
+                    g.drawRect(canvasWidth*i,canvasHeight*j,canvasWidth,canvasHeight);
+                }
+            }
+            MyField.draw(g,this.getWidth(),this.getHeight());
+
+        }
+    }
     public void addCompToPane(Container p){
 
         cards = new JPanel(new CardLayout());
-
-        var mJPanel = new Field(numberOfColumns,numberOfRows);
+        var mJPanel = new Canvas();
+        MyField = new Field(numberOfColumns,numberOfRows);
         mJPanel.setFocusable(true);
         var StartButton = new JButton("Start the Game");
         var buttonFont = new Font(Font.SANS_SERIF, Font.ITALIC, 30);

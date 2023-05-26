@@ -23,7 +23,7 @@ public class Apple {
     public int getCol(){
         return this.col;
     }
-    public void Paint(Graphics g, int width,int height){
+    public void draw(Graphics g, int width,int height){
         g.fillOval((width/columnCount)*col,(height/rowCount)*row,width/columnCount,height/rowCount);
     }
 }
