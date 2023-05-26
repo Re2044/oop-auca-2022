@@ -8,7 +8,10 @@ public class Field  extends JPanel {
     private int rowCount;
     private int columnCount;
     public Field(int rowCount,int columnCount){
-
+        this.rowCount = rowCount;
+        this.columnCount = columnCount;
+        MySnake = new Snake(rowCount,columnCount,"Right");
+        MyApple = new Apple(rowCount,columnCount,0);
     }
     public int getRow(){
         return rowCount;
@@ -27,6 +30,6 @@ public class Field  extends JPanel {
             }
         }
         g.setColor(Color.RED);
-        g.fillOval(column*canvasWidth,row*canvasHeight,canvasWidth,canvasHeight);
+
     }
 }
