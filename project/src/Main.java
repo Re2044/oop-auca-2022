@@ -37,7 +37,18 @@ public class Main extends JFrame {
         MySnake = new Snake(numberOfRows,numberOfColumns,"Right", Color.RED);
         MyApple = new Apple(numberOfRows,numberOfColumns,0, Color.RED);
         mJPanel.setFocusable(true);
-
+        mJPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                    try{
+                        MySnake.SetDirection(e.getKeyCode());
+                    }
+                    catch (IllegalStateException ex){
+                        System.err.println(ex.getMessage());
+                    }
+            }
+        });
         //var StartButton = new JButton("Start the Game");
         //var buttonFont = new Font(Font.SANS_SERIF, Font.ITALIC, 30);
         //StartButton.setFont(buttonFont);

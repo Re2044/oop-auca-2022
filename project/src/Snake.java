@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.util.ArrayList;
 
+import static java.awt.event.KeyEvent.*;
+
 public class Snake {
     private int length;
     private ArrayList<Point> body = new ArrayList<>();
@@ -45,5 +47,41 @@ public class Snake {
                 body.add(new Point(head.x+1, head.y));
                 break;
         }
+    }
+    public void SetDirection(String newDirection){
+        direction = newDirection;
+    }
+    public void SetDirection(int KeyCode){
+        switch(KeyCode){
+            case VK_LEFT:
+                if(direction.equals("right")){
+                    throw new IllegalStateException("Cannot change direction this way");
+                }
+                else{
+                    SetDirection("left");
+                }
+            case VK_RIGHT:
+                if(direction.equals("left")){
+                    throw new IllegalStateException("Cannot change direction this way");
+                }
+                else {
+                    SetDirection("right");
+                }
+            case VK_UP:
+                if(direction.equals("down")){
+                    throw new IllegalStateException("Cannot change direction this way");
+                }
+                else{
+                    SetDirection("up");
+                }
+            case VK_DOWN:
+                if(direction.equals("up")){
+                    throw new IllegalStateException("Cannot change direction this way");
+                }
+                else{
+                    SetDirection("down");
+                }
+        }
+
     }
 }
