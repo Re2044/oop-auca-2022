@@ -12,6 +12,8 @@ public class Main extends JFrame {
     public static final int numberOfRows = 20;
 
     private static Field MyField;
+    private static Snake MySnake;
+    private static Apple MyApple;
     class Canvas extends JPanel{
         @Override
         protected void paintComponent(Graphics g){
@@ -23,36 +25,39 @@ public class Main extends JFrame {
                     g.drawRect(canvasWidth*i,canvasHeight*j,canvasWidth,canvasHeight);
                 }
             }
-            MyField.draw(g,this.getWidth(),this.getHeight());
-
+            MySnake.draw(g,this.getWidth(),this.getHeight());
+            MyApple.draw(g,this.getWidth(),this.getHeight());
         }
     }
     public void addCompToPane(Container p){
 
         cards = new JPanel(new CardLayout());
         var mJPanel = new Canvas();
-        MyField = new Field(numberOfColumns,numberOfRows);
+        MyField = new Field(numberOfColumns,numberOfRows, Color.BLACK);
+        MySnake = new Snake(numberOfRows,numberOfColumns,"Right", Color.RED);
+        MyApple = new Apple(numberOfRows,numberOfColumns,0, Color.RED);
         mJPanel.setFocusable(true);
-        var StartButton = new JButton("Start the Game");
-        var buttonFont = new Font(Font.SANS_SERIF, Font.ITALIC, 30);
-        StartButton.setFont(buttonFont);
-        StartButton.addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                CardLayout cl = (CardLayout)(cards.getLayout());
-                cl.show(cards, (String)e.getItem());
-            }
-        });
+
+        //var StartButton = new JButton("Start the Game");
+        //var buttonFont = new Font(Font.SANS_SERIF, Font.ITALIC, 30);
+        //StartButton.setFont(buttonFont);
+       // StartButton.addItemListener(new ItemListener() {
+       //     @Override
+       //     public void itemStateChanged(ItemEvent e) {
+       //         CardLayout cl = (CardLayout)(cards.getLayout());
+       //         cl.show(cards, (String)e.getItem());
+       //     }
+      //  });
         mJPanel.setBackground(Color.BLACK);
 
         var cJPanel = new JPanel();
         cJPanel.setBackground(Color.DARK_GRAY);
-        mJPanel.add(StartButton,BorderLayout.NORTH);
+       // mJPanel.add(StartButton,BorderLayout.NORTH);
 
-        cards.add(mJPanel, "card 1");
-        cards.add(cJPanel, "card 2");
+      //  cards.add(mJPanel, "card 1");
+      //  cards.add(cJPanel, "card 2");
 
-        p.add(cards,BorderLayout.CENTER);
+     //   p.add(cards,BorderLayout.CENTER);
     }
     JPanel cards;
     Main(){

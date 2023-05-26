@@ -2,16 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Field {
-    private Apple MyApple;
-
-    private Snake MySnake;
-    private int rowCount;
-    private int columnCount;
-    public Field(int rowCount,int columnCount){
+    private final Color color;
+    private final int rowCount;
+    private final int columnCount;
+    public Field(int rowCount,int columnCount,Color color){
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        MySnake = new Snake(rowCount,columnCount,"Right");
-        MyApple = new Apple(rowCount,columnCount,0);
+        this.color = color;
     }
     public int getRow(){
         return rowCount;
@@ -19,9 +16,8 @@ public class Field {
     public int getCol(){
         return columnCount;
     }
-    public void draw(Graphics g,int width,int height){
-        MyApple.draw(g,width,height);
-        MySnake.draw(g,width,height);
+    public Color getColor(){
+        return color;
     }
 
 }

@@ -3,34 +3,47 @@ import java.util.ArrayList;
 
 public class Snake {
     private int length;
-    private ArrayList<Integer> arrayRow = new ArrayList<>();
-    private ArrayList<Integer> arrayCol = new ArrayList<>();
+    private ArrayList<Point> body = new ArrayList<>();
     private int rowCount;
     private int columnCount;
     private String direction;
-    private static Color color = Color.RED;
-    Snake(int rowCount,int columnCount,String direction){
+    private Color color = Color.RED;
+    private Point head;
+    Snake(int rowCount,int columnCount,String direction, Color color){
         this.direction = direction;
         this.rowCount = rowCount;
         this.columnCount = columnCount;
-        arrayRow.add(0);
-        arrayCol.add(0);
+        head = new Point(0,0);
+        body.add(head);
         length = 1;
+        this.color = color;
     }
     public void draw(Graphics g, int width, int height){
         g.setColor(color);
-        for(int i = 0; i<arrayRow.size();i++)   {
-            int col = arrayCol.get(i);
-            int row = arrayRow.get(i);
+        for(int i = 0; i<body.size();i++)   {
+            var point = body.get(i);
+            int row = point.x;
+            int col = point.y;
             g.fillOval((width/columnCount)*col,(height/rowCount)*row,width/columnCount,height/rowCount);
         }
     }
     public void move(int nextRow,int nextCol){
         if(length==10){
-            arrayCol.remove(0);
-            arrayRow.remove(0);
+            body.remove(0);
         }
-        arrayCol.add(nextCol);
-        arrayRow.add(nextRow);
+        switch(direction){
+            case "left":
+                body.add(new Point(head.x-1, head.y));
+                break;
+            case "up":
+                body.add(new Point(head.x, head.y-1));
+                break;
+            case "down":
+                body.add(new Point(head.x, head.y+1));
+                break;
+            case "right":
+                body.add(new Point(head.x+1, head.y));
+                break;
+        }
     }
 }
