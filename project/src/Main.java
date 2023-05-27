@@ -34,8 +34,8 @@ public class Main extends JFrame {
         cards = new JPanel(new CardLayout());
         var mJPanel = new Canvas();
         MyField = new Field(numberOfColumns,numberOfRows, Color.BLACK);
-        MySnake = new Snake(numberOfRows,numberOfColumns,"Right", Color.RED);
-        MyApple = new Apple(numberOfRows,numberOfColumns,0, Color.RED);
+        MySnake = new Snake(numberOfRows,numberOfColumns,"Right");
+        MyApple = new Apple(numberOfRows,numberOfColumns,0, Color.YELLOW);
         mJPanel.setFocusable(true);
         mJPanel.addKeyListener(new KeyAdapter() {
             @Override

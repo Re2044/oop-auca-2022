@@ -9,19 +9,26 @@ public class Snake {
     private int rowCount;
     private int columnCount;
     private String direction;
-    private Color color = Color.RED;
+    private Color colorAlive;
+    private Color colorDead;
     private Point head;
-    Snake(int rowCount,int columnCount,String direction, Color color){
+    private boolean IsDead;
+    Snake(int rowCount,int columnCount,String direction){
         this.direction = direction;
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         head = new Point(0,0);
         body.add(head);
         length = 1;
-        this.color = color;
+        this.colorAlive = Color.RED;
+        this.colorDead = Color.DARK_GRAY;
+        IsDead=false;
     }
     public void draw(Graphics g, int width, int height){
-        g.setColor(color);
+        if(IsDead)
+            g.setColor(colorDead);
+        else
+            g.setColor(colorAlive);
         for(int i = 0; i<body.size();i++)   {
             var point = body.get(i);
             int row = point.x;
@@ -29,13 +36,16 @@ public class Snake {
             g.fillOval((width/columnCount)*col,(height/rowCount)*row,width/columnCount,height/rowCount);
         }
     }
-    public void move(int nextRow,int nextCol){
+    public void move(){
         if(length==10){
             body.remove(0);
         }
         switch(direction){
             case "left":
                 body.add(new Point(head.x-1, head.y));
+                if(head.x==0){
+
+                }
                 break;
             case "up":
                 body.add(new Point(head.x, head.y-1));
