@@ -5,15 +5,13 @@ public class Apple {
     private int row;
     private int col;
     private Random generator;
-    private int rowCount;
-    private int columnCount;
     private Color color;
-    public Apple(int rowCount,int columnCount,int seed, Color color){
+    private Field field;
+    public Apple(int seed, Color color,Field field){
         generator = new Random(seed);
-        this.rowCount =rowCount;
-        this.columnCount = columnCount;
-        changeLocation(0,rowCount,0,columnCount);
+        changeLocation(0,field.getRow(),0,field.getCol());
         this.color = color;
+        this.field = field;
     }
     public void changeLocation(int minRow,int maxRow, int minCol,int maxCol){
         this.row = generator.nextInt(minRow,maxRow);
@@ -29,6 +27,6 @@ public class Apple {
         return this.color;
     }
     public void draw(Graphics g, int width,int height){
-        g.fillOval((width/columnCount)*col,(height/rowCount)*row,width/columnCount,height/rowCount);
+        g.fillOval((width/field.getCol())*col,(height/field.getRow())*row,width/field.getCol(),height/field.getRow());
     }
 }

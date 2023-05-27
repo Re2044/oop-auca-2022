@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.EventListener;
 
 import static java.awt.font.GraphicAttribute.ROMAN_BASELINE;
 
-public class Main extends JFrame {
+public class Main extends JFrame implements ActionListener {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 800;
 
@@ -14,6 +15,12 @@ public class Main extends JFrame {
     private static Field MyField;
     private static Snake MySnake;
     private static Apple MyApple;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        MySnake.move();
+    }
+
     class Canvas extends JPanel{
         @Override
         protected void paintComponent(Graphics g){
@@ -25,30 +32,16 @@ public class Main extends JFrame {
                     g.drawRect(canvasWidth*i,canvasHeight*j,canvasWidth,canvasHeight);
                 }
             }
+
             MySnake.draw(g,this.getWidth(),this.getHeight());
+
             MyApple.draw(g,this.getWidth(),this.getHeight());
         }
     }
     public void addCompToPane(Container p){
-
         cards = new JPanel(new CardLayout());
         var mJPanel = new Canvas();
-        MyField = new Field(numberOfColumns,numberOfRows, Color.BLACK);
-        MySnake = new Snake(numberOfRows,numberOfColumns,"Right");
-        MyApple = new Apple(numberOfRows,numberOfColumns,0, Color.YELLOW);
-        mJPanel.setFocusable(true);
-        mJPanel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                    try{
-                        MySnake.SetDirection(e.getKeyCode());
-                    }
-                    catch (IllegalStateException ex){
-                        System.err.println(ex.getMessage());
-                    }
-            }
-        });
+
         //var StartButton = new JButton("Start the Game");
         //var buttonFont = new Font(Font.SANS_SERIF, Font.ITALIC, 30);
         //StartButton.setFont(buttonFont);
@@ -77,7 +70,27 @@ public class Main extends JFrame {
         setSize(WIDTH,HEIGHT);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.addCompToPane(this.getContentPane());
+       // this.addCompToPane(this.getContentPane());
+        var mJPanel = new Canvas();
+        MyField = new Field(numberOfColumns,numberOfRows, Color.BLACK);
+        MySnake = new Snake(0,0,1,0,MyField);
+        MyApple = new Apple(0, Color.YELLOW,MyField);
+        mJPanel.setFocusable(true);
+        mJPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                try{
+                    MySnake.SetDirection(e.getKeyCode());
+                }
+                catch (IllegalStateException ex){
+                    System.err.println(ex.getMessage());
+                }
+            }
+        });
+        mJPanel.setBackground(Color.BLACK);
+        add(mJPanel);
+
         this.pack();
 
     }
