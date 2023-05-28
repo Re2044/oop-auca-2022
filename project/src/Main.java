@@ -1,3 +1,8 @@
+import game.models.*;
+import game.view.AppleView;
+import game.view.SnakeView;
+
+
 import static game.utilities.DrawingHelpers.*;
 
 import javax.swing.*;
@@ -8,8 +13,8 @@ import static game.Params.*;
 
 public class Main extends JFrame {
 
-    private static  Field myField;
-    private static  Snake mySnake;
+    private static Field myField;
+    private static Snake mySnake;
 
 
     CardLayout layoutManager = new CardLayout();
@@ -45,8 +50,8 @@ public class Main extends JFrame {
                 }
             }
 
-            mySnake.draw((Graphics2D) g,this.getWidth(),this.getHeight());
-            myField.getApple().draw((Graphics2D)g,getWidth(),getHeight());
+            SnakeView.draw((Graphics2D) g,mySnake);
+            AppleView.draw((Graphics2D) g,myField.getApple());
 
 
 
@@ -76,20 +81,9 @@ public class Main extends JFrame {
         mySnake = new Snake(0,0,"right",myField,SNAKE_LENGTH);
         Apple apple = new Apple(0,Color.YELLOW,myField,mySnake);
         myField.setApple(apple);
-       // MyApple = new Apple(0, Color.YELLOW,MyField);
-        mJPanel.setFocusable(true);
-        mJPanel.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                try{
-                    mySnake.SetDirection(e.getKeyCode());
-                }
-                catch (IllegalStateException ex){
-                    System.err.println(ex.getMessage());
-                }
-            }
-        });
+
+
+
         mJPanel.setBackground(Color.BLACK);
 
         var startButton = new JButton("Start the game");
@@ -97,6 +91,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layoutManager.next(containerPanel);
+                mJPanel.setFocusable(true);
             }
         });
         var restartButton = new JButton("Restart the game");
@@ -104,6 +99,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layoutManager.previous(containerPanel);
+                mJPanel.setFocusable(true);
                 myField = new Field(numberOfColumns,numberOfRows, Color.DARK_GRAY);
                 mySnake = new Snake(0,0,"right",myField,SNAKE_LENGTH);
                 Apple apple = new Apple(0,Color.YELLOW,myField,mySnake);
@@ -111,20 +107,39 @@ public class Main extends JFrame {
                 gameState = true;
             }
         });
+        mJPanel.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                super.keyPressed(e);
+                try{
+                    if(gameState) { mJPanel.setFocusable(true); mySnake.SetDirection(e.getKeyCode());}
+                }
+                catch (IllegalStateException ex){
+                    System.err.println(ex.getMessage());
+                }
+            }
+        });
+        var adtPanel  = new JPanel()
+        var currScore = new JLabel(String.valueOf(mySnake.getScore()));
+        currScore.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        mJPanel.add(currScore,BorderLayout.NORTH);
         menuPanel.setBackground(Color.BLACK);
         startButton.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
         menuPanel.add(startButton);
         restartPanel.setBackground(Color.BLACK);
+        restartButton.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
         restartPanel.add(restartButton);
+
+
         containerPanel.add(menuPanel);
         containerPanel.add(mJPanel);
         containerPanel.add(restartPanel);
 
 
-        getContentPane().add(containerPanel);
+       add(containerPanel);
 
 
-       // this.pack();
+
 
     }
 

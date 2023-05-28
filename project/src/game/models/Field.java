@@ -1,4 +1,7 @@
-import javax.swing.*;
+package game.models;
+
+import game.models.Apple;
+
 import java.awt.*;
 
 public class Field {

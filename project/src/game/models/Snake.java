@@ -1,3 +1,5 @@
+package game.models;
+
 import static game.utilities.DrawingHelpers.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
@@ -13,7 +15,7 @@ public class Snake {
     private int headID;
     private boolean IsDead;
     private int score;
-    Snake(int x,int y,String direction,Field field,int length){
+    public Snake(int x, int y, String direction, Field field, int length){
         this.SetDirection(direction);
         headID = 0;
         for(int i = 0 ; i<length;i++){
@@ -27,19 +29,7 @@ public class Snake {
     }public boolean isDead(){
         return IsDead;
     }
-    public void draw(Graphics2D g, int width, int height){
 
-        for(var point : body )   {
-            int row = point.x;
-            int col = point.y;
-            if(IsDead)
-                g.setColor(colorDead);
-            else
-                g.setColor(colorAlive);
-
-            g.fill(new Rectangle2D.Float(horShift+canvasSize*row,verShift+canvasSize*col,canvasSize-GAP_PX,canvasSize-GAP_PX));
-        }
-    }
     public ArrayList<Point> getBody(){
         return body;
     }
@@ -48,6 +38,11 @@ public class Snake {
     }
     public int getScore(){
         return score;
+    }
+    public Color getColor(){
+        if(isDead())
+            return colorDead;
+        return colorAlive;
     }
     public void move(){
         var head = getHead();

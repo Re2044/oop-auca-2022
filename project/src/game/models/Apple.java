@@ -1,3 +1,5 @@
+package game.models;
+
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
@@ -10,7 +12,7 @@ public class Apple {
     private final Color color;
     private final Field field;
     private final Snake snake;
-    public Apple(int seed, Color color,Field field, Snake snake){
+    public Apple(int seed, Color color, Field field, Snake snake){
         this.snake =snake;
         generator = new Random(seed);
 
@@ -31,8 +33,5 @@ public class Apple {
     public Color getColor(){
         return this.color;
     }
-    public void draw(Graphics2D g, int width,int height){
-        g.setColor(color);
-        g.fill(new Rectangle2D.Float(horShift+canvasSize*col,verShift+canvasSize*row,canvasSize-GAP_PX,canvasSize-GAP_PX));
-    }
+
 }
