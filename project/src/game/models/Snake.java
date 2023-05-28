@@ -13,7 +13,7 @@ public class Snake {
     private final Color colorAlive;
     private final Color colorDead;
     private int headID;
-    private boolean IsDead;
+    private boolean IsDead = true;
     private int score;
     public Snake(int x, int y, String direction, Field field, int length){
         this.SetDirection(direction);
