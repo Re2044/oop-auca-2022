@@ -1,110 +1,132 @@
 import java.awt.*;
+import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 
 import static java.awt.event.KeyEvent.*;
 
 public class Snake {
-    private Field field;
+    private final Field field;
     private int dx,dy;
-    private ArrayList<Point> body = new ArrayList<>();
-    private String direction;
-    private Color colorAlive;
-    private Color colorDead;
-    private Point head;
+    private final ArrayList<Point> body = new ArrayList<>();
+    private final Color colorAlive;
+    private final Color colorDead;
+    private int headID;
     private boolean IsDead;
     private int score;
-    Snake(int x,int y,int dx,int dy,Field field){
-        this.dx =dx;
-        this.dy = dy;
-        head = new Point(x,y);
-        body.add(head);
+    Snake(int x,int y,String direction,Field field,int length){
+        this.SetDirection(direction);
+        headID = 0;
+        for(int i = 0 ; i<length;i++){
+            body.add(new Point(x,y));
+        }
         this.colorAlive = Color.RED;
         this.colorDead = Color.GRAY;
         IsDead=false;
         score = 0;
         this.field = field;
     }
-    public void draw(Graphics g, int width, int height){
-        if(IsDead)
-            g.setColor(colorDead);
-        else
-            g.setColor(colorAlive);
-        for(int i = 0; i<body.size();i++)   {
-            var point = body.get(i);
+    public void draw(Graphics2D g, int width, int height){
+
+        for(var point : body )   {
             int row = point.x;
             int col = point.y;
-            g.fillRect((width/field.getCol())*col,(height/field.getRow())*row,width/field.getCol(),height/field.getRow());
+            if(IsDead)
+                g.setColor(colorDead);
+            else
+                g.setColor(colorAlive);
+
+            g.fill(new Rectangle2D.Float((width/(float)field.getCol())*row+1,(height/(float)field.getRow())*col+1,width/(float)field.getCol()-1,height/(float)field.getRow()-1));
         }
     }
     public ArrayList<Point> getBody(){
         return body;
     }
     public Point getHead(){
-        return head;
+        return body.get(headID);
     }
     public int getScore(){
         return score;
     }
     public void move(){
+        var head = getHead();
+        int nextX = head.x+dx;
+        int nextY = head.y+dy;
         if(IsDead)
             return;
-        if(body.size()==10){
-            body.remove(0);
-        }
-        if(field.isCords(head.x+dx,head.y+dy))
-            body.add(new Point(head.x+dx,head.y+dy));
-        else{
+        if(!field.isCords(nextX,nextY) || areCords(nextX,nextY)) {
             IsDead = true;
+            return;
         }
+        if(field.getApple().getCol()==nextX && field.getApple().getRow()==nextY){
+            score++;
+            body.add(new Point(nextX,nextY));
+            headID++;
+            head = getHead();
+            head.x = nextX;
+            head.y = nextY;
+            field.getApple().changeLocation();
+        }
+        else{
+            headID = (headID+1)%(body.size());
+            head = getHead();
+            head.x = nextX;
+            head.y = nextY;
+        }
+
     }
     public void SetDirection(String newDirection){
-        if(!direction.equals("right") && !direction.equals("left") && !direction.equals("up") && !direction.equals("down")){
+        if(!newDirection.equals("right") && !newDirection.equals("left") && !newDirection.equals("up") && !newDirection.equals("down")){
             throw new IllegalArgumentException("Wrong direction name");
         }
         else{
-            switch(newDirection){
-                case "left":
-                    if(direction.equals("right")) throw new IllegalStateException("Cannot change direction this way");
-                    else direction = newDirection;
-                    dx = -1;
-                    dy = 0;
-                    break;
-                case "right":
-                    if(direction.equals("left")) throw new IllegalStateException("Cannot change direction this way");
-                    else direction = newDirection;
-                    dx = 1;
-                    dy = 0;
-                    break;
-                case "up":
-                    if(direction.equals("down")) throw new IllegalStateException("Cannot change direction this way");
-                    else direction = newDirection;
-                    dx = 0;
-                    dy = -1;
-                    break;
-                case "down":
-                    if(direction.equals("up")) throw new IllegalStateException("Cannot change direction this way");
-                    else direction = newDirection;
-                    dx = 0;
-                    dy = 1;
-                    break;
+            switch (newDirection) {
+                case "left" -> {
+                    if (dx==1 && dy==0) throw new IllegalStateException("Cannot change direction this way");
+                    else{
+                        dx = -1;
+                        dy = 0;
+                    }
+                }
+                case "right" -> {
+                    if (dx==-1 && dy==0) throw new IllegalStateException("Cannot change direction this way");
+                    else {
+                        dx = 1;
+                        dy = 0;
+                    }
+                }
+                case "up" -> {
+                    if (dx==0 && dy==1) throw new IllegalStateException("Cannot change direction this way");
+                    else {
+                        dx = 0;
+                        dy = -1;
+                    }
+                }
+                case "down" -> {
+                    if (dx==0 && dy==-1) throw new IllegalStateException("Cannot change direction this way");
+                    else {
+                        dx = 0;
+                        dy = 1;
+                    }
+                }
             }
         }
     }
     public void SetDirection(int KeyCode){
-        switch(KeyCode){
-            case VK_LEFT:
-                SetDirection("left");
-                break;
-            case VK_RIGHT:
-                SetDirection("right");
-                break;
-            case VK_UP:
-                SetDirection("up");
-                break;
-            case VK_DOWN:
-                SetDirection("down");
-                break;
+        switch (KeyCode) {
+            case VK_LEFT -> SetDirection("left");
+            case VK_RIGHT -> SetDirection("right");
+            case VK_UP -> SetDirection("up");
+            case VK_DOWN -> SetDirection("down");
         }
 
     }
+    private boolean areCords(int x,int y){
+        for(var point : body){
+            if(point.x==x && point.y==y){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

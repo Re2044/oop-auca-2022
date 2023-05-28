@@ -10,7 +10,6 @@ public class Field {
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         this.color = color;
-        apple = new Apple(0,Color.YELLOW,this);
     }
     public int getRow(){
         return rowCount;
@@ -22,6 +21,7 @@ public class Field {
         return color;
     }
     public Apple getApple(){return apple;}
+    public void setApple(Apple apple){this.apple = apple;}
     public boolean isCords(int x,int y) {
         if(x >= 0 && x < this.getCol() && y >= 0 && y < this.getRow()) return true;
         else return false;
