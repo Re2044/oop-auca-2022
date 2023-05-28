@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
-
+import static game.utilities.DrawingHelpers.*;
+import static game.Params.*;
 public class Apple {
     private int row;
     private int col;
@@ -32,6 +33,6 @@ public class Apple {
     }
     public void draw(Graphics2D g, int width,int height){
         g.setColor(color);
-        g.fill(new Rectangle2D.Float((width/(float)field.getCol())*col,(height/(float)field.getRow())*row,width/(float)field.getCol(),height/(float)field.getRow()));
+        g.fill(new Rectangle2D.Float(horShift+canvasSize*col,verShift+canvasSize*row,canvasSize-GAP_PX,canvasSize-GAP_PX));
     }
 }

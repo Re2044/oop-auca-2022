@@ -1,9 +1,9 @@
+import static game.utilities.DrawingHelpers.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
-
 import static java.awt.event.KeyEvent.*;
-
+import static game.Params.*;
 public class Snake {
     private final Field field;
     private int dx,dy;
@@ -24,6 +24,8 @@ public class Snake {
         IsDead=false;
         score = 0;
         this.field = field;
+    }public boolean isDead(){
+        return IsDead;
     }
     public void draw(Graphics2D g, int width, int height){
 
@@ -35,7 +37,7 @@ public class Snake {
             else
                 g.setColor(colorAlive);
 
-            g.fill(new Rectangle2D.Float((width/(float)field.getCol())*row+1,(height/(float)field.getRow())*col+1,width/(float)field.getCol()-1,height/(float)field.getRow()-1));
+            g.fill(new Rectangle2D.Float(horShift+canvasSize*row,verShift+canvasSize*col,canvasSize-GAP_PX,canvasSize-GAP_PX));
         }
     }
     public ArrayList<Point> getBody(){
