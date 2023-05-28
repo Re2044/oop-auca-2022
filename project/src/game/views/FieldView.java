@@ -16,7 +16,7 @@ public class FieldView {
         float canvasHeight = panel.getHeight()/(float)field.getRow();
         canvasSize = Math.min(canvasHeight,canvasWidth);
         float fieldWidth = canvasSize * field.getCol();
-        float fieldHeight = canvasSize * field.getCol();
+        float fieldHeight = canvasSize * field.getRow();
         horShift = (panel.getWidth() - fieldWidth)*0.5f;
         verShift = (panel.getHeight() - fieldHeight)*0.5f;
         for(int i = 0;i<field.getRow();i++){

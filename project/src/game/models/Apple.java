@@ -11,9 +11,9 @@ public class Apple {
     private Random generator;
     private final Color color;
     private final Field field;
-    private final Snake snake;
-    public Apple(int seed, Color color, Field field, Snake snake){
-        this.snake =snake;
+
+    public Apple(int seed, Color color, Field field){
+
         generator = new Random(seed);
 
         this.color = color;

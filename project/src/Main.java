@@ -1,22 +1,22 @@
 import game.Params;
-import game.controllers.SnakeActionController;
+import game.controllers.FieldController;
+import game.controllers.SnakeController;
 import game.models.*;
 import game.views.AppleView;
 import game.views.FieldView;
 import game.views.SnakeView;
 
 
-import static game.utilities.DrawingHelpers.*;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.geom.Rectangle2D;
+
 import static game.Params.*;
 
 public class Main extends JFrame {
     private static Field myField;
     private static Snake mySnake;
+
     CardLayout layoutManager = new CardLayout();
     JPanel containerPanel = new JPanel();
     private static boolean gameState = false;
@@ -49,16 +49,14 @@ public class Main extends JFrame {
         var mJPanel = new Canvas();
         mJPanel.setBackground(Color.BLACK);
 
-        var startButton = new JButton("Start the game");
+        var startButton = new JButton("New Game");
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layoutManager.next(containerPanel);
-                mJPanel.setFocusable(true);
-                myField = new Field(numberOfColumns,numberOfRows, FIELD_DEFAULT_COLOR);
+                myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
                 mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
-                Apple apple = new Apple(0,APPLE_DEFAULT_COLOR,myField,mySnake);
-                myField.setApple(apple);
+                myField.setApple(new Apple(0,APPLE_DEFAULT_COLOR,myField));
                 gameState = true;
             }
         });
@@ -67,11 +65,9 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layoutManager.previous(containerPanel);
-                mJPanel.setFocusable(true);
-                myField = new Field(numberOfColumns,numberOfRows, FIELD_DEFAULT_COLOR);
+                myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
                 mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
-                Apple apple = new Apple(0,APPLE_DEFAULT_COLOR,myField,mySnake);
-                myField.setApple(apple);
+                myField.setApple(new Apple(0,APPLE_DEFAULT_COLOR,myField));
                 gameState = true;
             }
         });
@@ -85,7 +81,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.SetDirection("up");
+                        mySnake.setDirection("up");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -98,7 +94,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.SetDirection("down");
+                        mySnake.setDirection("down");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -111,7 +107,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.SetDirection("right");
+                        mySnake.setDirection("right");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -124,7 +120,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.SetDirection("left");
+                        mySnake.setDirection("left");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -136,19 +132,33 @@ public class Main extends JFrame {
 
         var adtPanel  = new JPanel();
         if(gameState){
-            var currScore = new JLabel(String.valueOf(mySnake.getScore()));
-            currScore.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            var currScore = new JLabel("Score: "+(mySnake.getScore()));
+            currScore.setLayout(new FlowLayout(FlowLayout.LEFT));
             mJPanel.add(currScore,BorderLayout.NORTH);
         }
 
         menuPanel.setBackground(Color.BLACK);
         menuPanel.setLayout(new BoxLayout(menuPanel,BoxLayout.Y_AXIS));
         startButton.setFont(BASIC_FONT);
+
         startButton.setBackground(Color.BLACK);
         startButton.setFocusPainted(false);
-        menuPanel.add(startButton);
+        startButton.setForeground(Color.BLUE);
+        menuPanel.add(startButton,BorderLayout.CENTER);
+
         restartPanel.setBackground(Color.BLACK);
         restartButton.setFont(BASIC_FONT);
+        if(mySnake!=null){
+            var ScoreLabel = new JLabel("Your Score is : " + mySnake.getScore()+"\n+ Congratulations!");
+            startButton.add(ScoreLabel,BorderLayout.CENTER);
+        }
+
+
+
+        restartButton.setBackground(Color.BLACK);
+        restartButton.setForeground(Color.BLUE);
+        restartButton.setFocusPainted(false);
+
         restartPanel.add(restartButton);
 
 

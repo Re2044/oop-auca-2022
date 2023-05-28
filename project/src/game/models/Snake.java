@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import static java.awt.event.KeyEvent.*;
 import static game.Params.*;
 public class Snake {
-    private final Field field;
+    private Field field;
     private int dx,dy;
     private final ArrayList<Point> body = new ArrayList<>();
-    private final Color colorAlive;
-    private final Color colorDead;
+    private Color colorAlive;
+    private Color colorDead;
     private int headID;
     private boolean IsDead = true;
     private int score;
     public Snake(int x, int y, String direction, Field field, int length){
-        this.SetDirection(direction);
+        this.setDirection(direction);
         headID = 0;
         for(int i = 0 ; i<length;i++){
             body.add(new Point(x,y));
@@ -26,10 +26,25 @@ public class Snake {
         IsDead=false;
         score = 0;
         this.field = field;
-    }public boolean isDead(){
+
+    }
+    public void setPos(int x,int y,int length){
+        for(int i = 0 ; i<length;i++){
+            body.add(new Point(x,y));
+        }
+    }
+    public void setField(Field field){
+        this.field = field;
+    }
+    public boolean isDead(){
         return IsDead;
     }
-
+    public void setColorAlive(Color color){
+        colorAlive = color;
+    }
+    public void setColorDead(Color color){
+        colorDead = color;
+    }
     public ArrayList<Point> getBody(){
         return body;
     }
@@ -71,7 +86,7 @@ public class Snake {
         }
 
     }
-    public void SetDirection(String newDirection){
+    public void setDirection(String newDirection){
         if(!newDirection.equals("right") && !newDirection.equals("left") && !newDirection.equals("up") && !newDirection.equals("down")){
             throw new IllegalArgumentException("Wrong direction name");
         }
@@ -108,12 +123,12 @@ public class Snake {
             }
         }
     }
-    public void SetDirection(int KeyCode){
+    public void setDirection(int KeyCode){
         switch (KeyCode) {
-            case VK_LEFT -> SetDirection("left");
-            case VK_RIGHT -> SetDirection("right");
-            case VK_UP -> SetDirection("up");
-            case VK_DOWN -> SetDirection("down");
+            case VK_LEFT -> setDirection("left");
+            case VK_RIGHT -> setDirection("right");
+            case VK_UP -> setDirection("up");
+            case VK_DOWN -> setDirection("down");
         }
 
     }

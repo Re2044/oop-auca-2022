@@ -5,15 +5,23 @@ import game.models.Apple;
 import java.awt.*;
 
 public class Field {
-    private final Color color;
-    private final int rowCount;
-    private final int columnCount;
+    private Color color;
+    private int rowCount;
+    private int columnCount;
     private Apple apple;
+
     public Field(int rowCount,int columnCount,Color color){
         this.rowCount = rowCount;
         this.columnCount = columnCount;
         this.color = color;
     }
+    public void setRowCount(int rowCount){
+        this.rowCount = rowCount;
+    }
+    public void setColumnCount(int columnCount){
+        this.columnCount = columnCount;
+    }
+    public void setColor(Color color){this.color = color;}
     public int getRow(){
         return rowCount;
     }
