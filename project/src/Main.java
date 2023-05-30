@@ -60,15 +60,11 @@ public class Main extends JFrame {
                 gameState = true;
             }
         });
-        var restartButton = new JButton("Restart the game");
-        restartButton.addActionListener(new ActionListener() {
+        var menuButton = new JButton("Main menu");
+        menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                layoutManager.previous(containerPanel);
-                myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
-                mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
-                myField.setApple(new Apple(0,APPLE_DEFAULT_COLOR,myField));
-                gameState = true;
+                layoutManager.first(containerPanel);
             }
         });
 
@@ -130,7 +126,6 @@ public class Main extends JFrame {
         });
 
 
-        var adtPanel  = new JPanel();
         if(gameState){
             var currScore = new JLabel("Score: "+(mySnake.getScore()));
             currScore.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -138,58 +133,83 @@ public class Main extends JFrame {
         }
 
         menuPanel.setBackground(Color.BLACK);
+        menuPanel.setLayout(new GridBagLayout());
+
         var buttonPanel = new JPanel();
+        buttonPanel.setLayout(new GridBagLayout());
+        buttonPanel.setBackground(Color.BLACK);
+
         startButton.setFont(BASIC_FONT);
         startButton.setAlignmentX(CENTER_ALIGNMENT);
-        startButton.setBackground(Color.DARK_GRAY);
+        startButton.setBackground(Color.BLACK);
         startButton.setFocusPainted(false);
-
         startButton.setForeground(Color.WHITE);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorderPainted(false);
+
         var Title = new JLabel("Wise snake devouring golden apples in the magic world");
         Title.setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
         Title.setForeground(Color.RED);
-        menuPanel.setLayout(new GridBagLayout());
+
+
         var gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.anchor = GridBagConstraints.NORTH;
         menuPanel.add(Title,gbc);
+
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+
         var exitButton = new JButton("Exit");
         exitButton.addActionListener(e->{System.exit(0);});
         exitButton.setFont(BASIC_FONT);
         exitButton.setAlignmentX(CENTER_ALIGNMENT);
-        exitButton.setBackground(Color.DARK_GRAY);
+        exitButton.setBackground(Color.BLACK);
         exitButton.setFocusPainted(false);
         exitButton.setForeground(Color.WHITE);
-        buttonPanel.setLayout(new GridBagLayout());
-        buttonPanel.setBackground(Color.BLACK);
-        startButton.setOpaque(false);
-        startButton.setContentAreaFilled(false);
-        startButton.setBorderPainted(false);
-        exitButton.setOpaque(false);
-        exitButton.setContentAreaFilled(false);
         exitButton.setBorderPainted(false);
+        exitButton.setContentAreaFilled(false);
+
         buttonPanel.add(startButton,gbc);
         buttonPanel.add(exitButton,gbc);
         menuPanel.add(buttonPanel,gbc);
-        //menuPanel.add(exitButton,gbc);
 
         restartPanel.setBackground(Color.BLACK);
-        restartButton.setFont(BASIC_FONT);
+        restartPanel.setLayout(new GridBagLayout());
+        menuButton.setFont(BASIC_FONT);
+
+        var endButtonPanel = new JPanel();
+        endButtonPanel.setLayout(new GridBagLayout());
+        endButtonPanel.setBackground(Color.BLACK);
+
+        var lostLabel = new JLabel(" You Lost");
+        lostLabel.setFont(new Font(Font.DIALOG,Font.BOLD,45));
+        lostLabel.setForeground(Color.RED);
         if(mySnake!=null){
             var ScoreLabel = new JLabel("Your Score is : " + mySnake.getScore()+"\n+ Congratulations!");
-            startButton.add(ScoreLabel,BorderLayout.CENTER);
+            restartPanel.add(ScoreLabel,gbc);
         }
 
+        menuButton.setBorderPainted(false);
+        menuButton.setContentAreaFilled(false);
+        menuButton.setBackground(Color.BLACK);
+        menuButton.setForeground(Color.WHITE);
+        menuButton.setFocusPainted(false);
 
+        var secExitButton =  new JButton("Exit");
+        secExitButton.addActionListener(e->{System.exit(0);});
+        secExitButton.setFont(BASIC_FONT);
+        secExitButton.setAlignmentX(CENTER_ALIGNMENT);
+        secExitButton.setBackground(Color.BLACK);
+        secExitButton.setFocusPainted(false);
+        secExitButton.setForeground(Color.WHITE);
+        secExitButton.setBorderPainted(false);
+        secExitButton.setContentAreaFilled(false);
 
-        restartButton.setBackground(Color.BLACK);
-        restartButton.setForeground(Color.BLUE);
-        restartButton.setFocusPainted(false);
-
-        restartPanel.add(restartButton);
-
+        restartPanel.add(lostLabel,gbc);
+        endButtonPanel.add(menuButton,gbc);
+        endButtonPanel.add(secExitButton,gbc);
+        restartPanel.add(endButtonPanel);
 
         containerPanel.add(menuPanel,BorderLayout.CENTER);
         containerPanel.add(mJPanel);
