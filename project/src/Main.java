@@ -19,15 +19,13 @@ public class Main extends JFrame {
     CardLayout layoutManager = new CardLayout();
     JPanel containerPanel = new JPanel();
     private static boolean gameState = false;
-    private static int currScore;
-    private static int bestScore;
     private static int gameSpeed = 200;
     private static JLabel scoreLabel;
     private static JLabel currScoreLabel;
     private static SnakeController mySnakeController;
+    private static FieldController myFieldController;
     Main(){
-        currScore = 0;
-        bestScore = 0;
+
         setTitle("Wise snake devouring golden apples in the magic world");
         //setLocationRelativeTo(null);
         setSize(Params.WIDTH,Params.HEIGHT);
@@ -53,7 +51,8 @@ public class Main extends JFrame {
                 myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
                 mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
                 mySnakeController = new SnakeController(mySnake);
-                myField.setApple(new Apple(0,APPLE_DEFAULT_COLOR,myField));
+                myFieldController = new FieldController(myField);
+                myFieldController.setFieldApple(new Apple(0,APPLE_DEFAULT_COLOR,myField));
                 gameState = true;
             }
         });
@@ -285,7 +284,6 @@ public class Main extends JFrame {
                     if(mySnakeController.checkSnakeState()){
                         layoutManager.last(containerPanel);
                         gameState = false;
-                        bestScore = Math.max(bestScore,currScore);
                     }
                     else{
                         mySnakeController.moveSnake();
@@ -301,9 +299,9 @@ public class Main extends JFrame {
         protected void paintComponent(Graphics g){
             super.paintComponent(g);
             Graphics2D g2D = (Graphics2D) g;
-            FieldView.draw(g2D,myField,this);
+            myFieldController.drawField(g2D,this);
             mySnakeController.drawSnake(g2D);
-            AppleView.draw(g2D,myField.getApple());
+            myFieldController.drawApple(g2D);
 
         }
     }

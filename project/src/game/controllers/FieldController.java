@@ -2,6 +2,7 @@ package game.controllers;
 
 import game.models.Apple;
 import game.models.Field;
+import game.views.AppleView;
 import game.views.FieldView;
 
 import java.awt.*;
@@ -21,5 +22,8 @@ public class FieldController {
     }
     public void drawField(Graphics2D g, Component component){
         FieldView.draw(g,field,component);
+    }
+    public void drawApple(Graphics2D g){
+        AppleView.draw(g,field.getApple());
     }
 }
