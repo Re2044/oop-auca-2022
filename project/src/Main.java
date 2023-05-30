@@ -164,9 +164,15 @@ public class Main extends JFrame {
         exitButton.setForeground(Color.WHITE);
         buttonPanel.setLayout(new GridBagLayout());
         buttonPanel.setBackground(Color.BLACK);
+        startButton.setOpaque(false);
+        startButton.setContentAreaFilled(false);
+        startButton.setBorderPainted(false);
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setBorderPainted(false);
         buttonPanel.add(startButton,gbc);
         buttonPanel.add(exitButton,gbc);
-         menuPanel.add(buttonPanel,gbc);
+        menuPanel.add(buttonPanel,gbc);
         //menuPanel.add(exitButton,gbc);
 
         restartPanel.setBackground(Color.BLACK);
