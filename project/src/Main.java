@@ -33,6 +33,9 @@ public class Main extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         containerPanel.setLayout(layoutManager);
+        var gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
 
         var menuPanel = new JPanel();
         var restartPanel = new JPanel();
@@ -59,11 +62,57 @@ public class Main extends JFrame {
                 layoutManager.first(containerPanel);
             }
         });
+        JDialog pauseMenu = new JDialog(this);
+        pauseMenu.getRootPane().setOpaque(false);
+        pauseMenu.setUndecorated(true);
+        pauseMenu.setBackground(new Color(0,0,0,0));
+
+
+        JPanel pausePanel = new JPanel();
+        var pauseButton = new JButton("Resume game");
+        pausePanel.setBackground(new Color(0,0,0,64));
+        pauseButton.addActionListener(e->{gameState = true;pauseMenu.setVisible(false);this.setFocusable(true);});
+        pauseButton.setFont(BASIC_FONT);
+        pauseButton.setAlignmentX(CENTER_ALIGNMENT);
+        pauseButton.setFocusPainted(false);
+        pauseButton.setForeground(Color.WHITE);
+        pauseButton.setBorderPainted(false);
+        pauseButton.setContentAreaFilled(false);
+
+        var pauseLabel = new JLabel("Game paused");
+        pauseLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
+        pauseLabel.setForeground(Color.RED);
+        pausePanel.setLayout(new GridBagLayout());
+        pausePanel.add(pauseLabel,gbc);
+        pausePanel.add(pauseButton,gbc);
+
+
+        pauseMenu.add(pausePanel);
+        pauseMenu.setVisible(false);
+        pauseMenu.add(pausePanel);
+
+
+        pauseMenu.setLocationRelativeTo(this);
+        pauseMenu.pack();
+
+        pauseMenu.setLocation((getWidth()/2-pauseMenu.getWidth()/2),(getHeight()/2-pauseMenu.getHeight()/2));
+
+
+
+        this.setFocusable(true);
 
         mJPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("UP"),"up");
         mJPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("DOWN"),"down");
         mJPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("RIGHT"),"right");
         mJPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("LEFT"),"left");
+        mJPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke("ESCAPE"),"pause");
+        mJPanel.getActionMap().put("pause", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               pauseMenu.setVisible(true);
+               gameState = false;
+            }
+        });
         mJPanel.getActionMap().put("up", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -144,9 +193,7 @@ public class Main extends JFrame {
         Title.setForeground(Color.RED);
 
 
-        var gbc = new GridBagConstraints();
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.NORTH;
+
         menuPanel.add(Title,gbc);
 
         gbc.anchor = GridBagConstraints.CENTER;
