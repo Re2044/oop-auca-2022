@@ -24,6 +24,7 @@ public class Main extends JFrame {
     private static int gameSpeed = 200;
     private static JLabel scoreLabel;
     private static JLabel currScoreLabel;
+    private static SnakeController mySnakeController;
     Main(){
         currScore = 0;
         bestScore = 0;
@@ -51,6 +52,7 @@ public class Main extends JFrame {
                 layoutManager.next(containerPanel);
                 myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
                 mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
+                mySnakeController = new SnakeController(mySnake);
                 myField.setApple(new Apple(0,APPLE_DEFAULT_COLOR,myField));
                 gameState = true;
             }
@@ -127,7 +129,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.setDirection("up");
+                        mySnakeController.setSnakeDirection("up");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -140,7 +142,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.setDirection("down");
+                        mySnakeController.setSnakeDirection("down");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -153,7 +155,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.setDirection("right");
+                        mySnakeController.setSnakeDirection("right");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -166,7 +168,7 @@ public class Main extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if(gameState){
                     try{
-                        mySnake.setDirection("left");
+                        mySnakeController.setSnakeDirection("left");
                     }
                     catch (IllegalStateException ex){
                         System.err.println(ex.getMessage());
@@ -280,15 +282,15 @@ public class Main extends JFrame {
             var timer = new Timer(gameSpeed,e->{
 
                 if(gameState){
-                    if(mySnake.isDead()){
+                    if(mySnakeController.checkSnakeState()){
                         layoutManager.last(containerPanel);
                         gameState = false;
                         bestScore = Math.max(bestScore,currScore);
                     }
                     else{
-                        mySnake.move();
-                        scoreLabel.setText("Your Wisdom is : " + mySnake.getScore());
-                        currScoreLabel.setText("Wisdom: " + mySnake.getScore());
+                        mySnakeController.moveSnake();
+                        scoreLabel.setText("Your Wisdom is : " + mySnakeController.getSnakeScore());
+                        currScoreLabel.setText("Wisdom: " + mySnakeController.getSnakeScore());
                         repaint();
                     }
                 }
@@ -300,7 +302,7 @@ public class Main extends JFrame {
             super.paintComponent(g);
             Graphics2D g2D = (Graphics2D) g;
             FieldView.draw(g2D,myField,this);
-            SnakeView.draw(g2D,mySnake);
+            mySnakeController.drawSnake(g2D);
             AppleView.draw(g2D,myField.getApple());
 
         }

@@ -2,17 +2,34 @@ package game.controllers;
 
 import game.models.Field;
 import game.models.Snake;
+import game.views.SnakeView;
 
 import java.awt.*;
 
 import static game.Params.*;
 
 public class SnakeController {
-    public static void setSnakeColorAlive(Color color, Snake snake){
+    Snake snake;
+    public SnakeController(Snake snake){
+        this.snake = snake;
+    }
+    public  void setSnakeColorAlive(Color color){
         snake.setColorAlive(color);
     }
-    public static void setSnakeColorDead(Color color, Snake snake){
+    public  void setSnakeColorDead(Color color){
         snake.setColorDead(color);
+    }
+    public  void setSnakeDirection(String direction){
+        snake.setDirection(direction);
+    }
+    public  void setSnakeDirection(int keyCode){
+        snake.setDirection(keyCode);
+    }
+    public  boolean checkSnakeState(){return snake.isDead();}
+    public int getSnakeScore(){return snake.getScore();}
+    public void moveSnake(){snake.move();}
+    public void drawSnake(Graphics2D g){
+        SnakeView.draw(g,snake);
     }
 
 }
