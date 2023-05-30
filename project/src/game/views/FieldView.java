@@ -14,7 +14,7 @@ public class FieldView {
     public static void draw(Graphics2D g, Field field, JPanel panel){
         float canvasWidth = panel.getWidth()/(float)field.getCol();
         float canvasHeight = panel.getHeight()/(float)field.getRow();
-        canvasSize = Math.min(canvasHeight,canvasWidth);
+        canvasSize = Math.min(canvasHeight,canvasWidth)*2/3;
         float fieldWidth = canvasSize * field.getCol();
         float fieldHeight = canvasSize * field.getRow();
         horShift = (panel.getWidth() - fieldWidth)*0.5f;

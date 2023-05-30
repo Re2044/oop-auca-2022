@@ -23,12 +23,12 @@ public class Main extends JFrame {
     private static int bestScore;
     private static int gameSpeed = 200;
     private static JLabel scoreLabel;
-    private static JLabel currScorePanel;
+    private static JLabel currScoreLabel;
     Main(){
         currScore = 0;
         bestScore = 0;
         setTitle("Wise snake devouring golden apples in the magic world");
-        setLocationRelativeTo(null);
+        //setLocationRelativeTo(null);
         setSize(Params.WIDTH,Params.HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -119,10 +119,10 @@ public class Main extends JFrame {
 
 
 
-        currScorePanel = new JLabel("Wisdom: 0");
-        currScorePanel.setFont(BASIC_FONT);
-        currScorePanel.setForeground(Color.WHITE);
-        mJPanel.add(currScorePanel,BorderLayout.LINE_START);
+        currScoreLabel = new JLabel("Wisdom: 0");
+        currScoreLabel.setFont(BASIC_FONT);
+        currScoreLabel.setForeground(Color.RED);
+        mJPanel.add(currScoreLabel,BorderLayout.LINE_START);
 
         menuPanel.setBackground(Color.BLACK);
         menuPanel.setLayout(new GridBagLayout());
@@ -232,7 +232,7 @@ public class Main extends JFrame {
                     else{
                         mySnake.move();
                         scoreLabel.setText("Your Wisdom is : " + mySnake.getScore());
-                        currScorePanel.setText("Wisdom: " + mySnake.getScore());
+                        currScoreLabel.setText("Wisdom: " + mySnake.getScore());
                         repaint();
                     }
                 }
