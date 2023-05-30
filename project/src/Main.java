@@ -19,8 +19,8 @@ public class Main extends JFrame {
     CardLayout layoutManager = new CardLayout();
     JPanel containerPanel = new JPanel();
     private static boolean gameState = false;
-    private static int currScore = 0;
-    private static int bestScore = 0;
+    private static int currScore;
+    private static int bestScore;
     private static int gameSpeed = 200;
     class Canvas extends JPanel{
         Canvas(){
@@ -69,6 +69,8 @@ public class Main extends JFrame {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                currScore = 0;
+                bestScore = 0;
                 layoutManager.next(containerPanel);
                 myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
                 mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
@@ -143,7 +145,7 @@ public class Main extends JFrame {
 
 
 
-        var currScorePanel = new JLabel("Score: "+(currScore));
+        var currScorePanel = new JLabel("Score: "+currScore);
         currScorePanel.setForeground(Color.WHITE);
         currScorePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         mJPanel.add(currScorePanel,BorderLayout.NORTH);
@@ -197,20 +199,23 @@ public class Main extends JFrame {
         var endButtonPanel = new JPanel();
         endButtonPanel.setLayout(new GridBagLayout());
         endButtonPanel.setBackground(Color.BLACK);
+        endButtonPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        var lostLabel = new JLabel(" You Lost");
+        var lostLabel = new JLabel("You Lost");
         lostLabel.setFont(new Font(Font.DIALOG,Font.BOLD,45));
         lostLabel.setForeground(Color.RED);
+        lostLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        var ScoreLabel = new JLabel("   Your Score is : " + currScore+"\n Congratulations!");
-        ScoreLabel.setForeground(Color.GREEN);
-
+        var scoreLabel = new JLabel("Your Score is : " + currScore);
+        scoreLabel.setForeground(Color.GREEN);
+        scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         menuButton.setBorderPainted(false);
         menuButton.setContentAreaFilled(false);
         menuButton.setBackground(Color.BLACK);
         menuButton.setForeground(Color.WHITE);
         menuButton.setFocusPainted(false);
+        menuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         var secExitButton =  new JButton("Exit");
         secExitButton.addActionListener(e->{System.exit(0);});
@@ -222,11 +227,14 @@ public class Main extends JFrame {
         secExitButton.setBorderPainted(false);
         secExitButton.setContentAreaFilled(false);
 
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.CENTER;
         restartPanel.add(lostLabel,gbc);
-        restartPanel.add(ScoreLabel,gbc);
-        endButtonPanel.add(menuButton,gbc);
-        endButtonPanel.add(secExitButton,gbc);
-        restartPanel.add(endButtonPanel);
+        restartPanel.add(scoreLabel,gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        restartPanel.add(menuButton,gbc);
+        restartPanel.add(secExitButton,gbc);
 
         containerPanel.add(menuPanel,BorderLayout.CENTER);
         containerPanel.add(mJPanel);
