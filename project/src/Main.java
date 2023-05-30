@@ -147,7 +147,7 @@ public class Main extends JFrame {
         startButton.setForeground(Color.WHITE);
         var Title = new JLabel("Wise snake devouring golden apples in the magic world");
         Title.setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
-        Title.setForeground(Color.YELLOW);
+        Title.setForeground(Color.RED);
         menuPanel.setLayout(new GridBagLayout());
         var gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -162,10 +162,12 @@ public class Main extends JFrame {
         exitButton.setBackground(Color.DARK_GRAY);
         exitButton.setFocusPainted(false);
         exitButton.setForeground(Color.WHITE);
-        buttonPanel.add(startButton);
-        buttonPanel.add(exitButton);
-        menuPanel.add(startButton,gbc);
-        menuPanel.add(exitButton,gbc);
+        buttonPanel.setLayout(new GridBagLayout());
+        buttonPanel.setBackground(Color.BLACK);
+        buttonPanel.add(startButton,gbc);
+        buttonPanel.add(exitButton,gbc);
+         menuPanel.add(buttonPanel,gbc);
+        //menuPanel.add(exitButton,gbc);
 
         restartPanel.setBackground(Color.BLACK);
         restartButton.setFont(BASIC_FONT);
