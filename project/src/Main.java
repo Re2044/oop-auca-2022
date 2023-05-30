@@ -119,7 +119,8 @@ public class Main extends JFrame {
 
 
 
-        currScorePanel = new JLabel("Score: 0");
+        currScorePanel = new JLabel("Wisdom: 0");
+        currScorePanel.setFont(BASIC_FONT);
         currScorePanel.setForeground(Color.WHITE);
         mJPanel.add(currScorePanel,BorderLayout.LINE_START);
 
@@ -179,7 +180,7 @@ public class Main extends JFrame {
         lostLabel.setForeground(Color.RED);
         lostLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        scoreLabel = new JLabel("Your Score is : 0");
+        scoreLabel = new JLabel("Your Wisdom is : 0");
         scoreLabel.setForeground(Color.GREEN);
         scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -230,8 +231,8 @@ public class Main extends JFrame {
                     }
                     else{
                         mySnake.move();
-                        scoreLabel.setText("Your Score is : " + mySnake.getScore());
-                        currScorePanel.setText("Score: "+mySnake.getScore());
+                        scoreLabel.setText("Your Wisdom is : " + mySnake.getScore());
+                        currScorePanel.setText("Wisdom: " + mySnake.getScore());
                         repaint();
                     }
                 }
