@@ -16,7 +16,6 @@ import static game.Params.*;
 public class Main extends JFrame {
     private static Field myField;
     private static Snake mySnake;
-
     CardLayout layoutManager = new CardLayout();
     JPanel containerPanel = new JPanel();
     private static boolean gameState = false;
@@ -128,6 +127,7 @@ public class Main extends JFrame {
 
         if(gameState){
             var currScore = new JLabel("Score: "+(mySnake.getScore()));
+            currScore.setForeground(Color.WHITE);
             currScore.setLayout(new FlowLayout(FlowLayout.LEFT));
             mJPanel.add(currScore,BorderLayout.NORTH);
         }
@@ -185,6 +185,7 @@ public class Main extends JFrame {
         var lostLabel = new JLabel(" You Lost");
         lostLabel.setFont(new Font(Font.DIALOG,Font.BOLD,45));
         lostLabel.setForeground(Color.RED);
+
         if(mySnake!=null){
             var ScoreLabel = new JLabel("Your Score is : " + mySnake.getScore()+"\n+ Congratulations!");
             restartPanel.add(ScoreLabel,gbc);
