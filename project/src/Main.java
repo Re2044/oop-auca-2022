@@ -138,13 +138,23 @@ public class Main extends JFrame {
         }
 
         menuPanel.setBackground(Color.BLACK);
-        menuPanel.setLayout(new BoxLayout(menuPanel,BoxLayout.Y_AXIS));
-        startButton.setFont(BASIC_FONT);
 
+        startButton.setFont(BASIC_FONT);
+        startButton.setAlignmentX(CENTER_ALIGNMENT);
         startButton.setBackground(Color.BLACK);
         startButton.setFocusPainted(false);
         startButton.setForeground(Color.BLUE);
-        menuPanel.add(startButton,BorderLayout.CENTER);
+        var Title = new JLabel("Wise snake devouring golden apples in the magic world");
+        Title.setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
+        Title.setForeground(Color.YELLOW);
+        menuPanel.setLayout(new GridBagLayout());
+        var gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.NORTH;
+        menuPanel.add(Title,gbc);
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        menuPanel.add(startButton,gbc);
 
         restartPanel.setBackground(Color.BLACK);
         restartButton.setFont(BASIC_FONT);
@@ -162,7 +172,7 @@ public class Main extends JFrame {
         restartPanel.add(restartButton);
 
 
-        containerPanel.add(menuPanel);
+        containerPanel.add(menuPanel,BorderLayout.CENTER);
         containerPanel.add(mJPanel);
         containerPanel.add(restartPanel);
 
