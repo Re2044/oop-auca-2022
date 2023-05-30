@@ -87,9 +87,18 @@ public class Main extends JFrame {
         pausePanel.add(pauseButton,gbc);
 
 
+
         pauseMenu.add(pausePanel);
         pauseMenu.setVisible(false);
-        pauseMenu.add(pausePanel);
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                pauseMenu.pack();
+                pauseMenu.setLocation((getWidth()/2-pauseMenu.getWidth()/2),(getHeight()/2-pauseMenu.getHeight()/2));
+            }
+
+        });
 
 
         pauseMenu.setLocationRelativeTo(this);
