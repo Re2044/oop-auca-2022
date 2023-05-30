@@ -61,6 +61,7 @@ public class Main extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 layoutManager.first(containerPanel);
+                gameState = false;
             }
         });
         JDialog pauseMenu = new JDialog(this);
@@ -79,14 +80,14 @@ public class Main extends JFrame {
         pExitButton.setBorderPainted(false);
         pExitButton.setContentAreaFilled(false);
 
-        var pMenuButton = new JButton("Exit");
-        pExitButton.addActionListener(e->{System.exit(0);});
-        pExitButton.setFont(BASIC_FONT);
-        pExitButton.setAlignmentX(CENTER_ALIGNMENT);
-        pExitButton.setFocusPainted(false);
-        pExitButton.setForeground(Color.WHITE);
-        pExitButton.setBorderPainted(false);
-        pExitButton.setContentAreaFilled(false);
+        var pMenuButton = new JButton("Main menu");
+        pMenuButton.addActionListener(e->{ layoutManager.first(containerPanel);pauseMenu.setVisible(false);});
+        pMenuButton.setFont(BASIC_FONT);
+        pMenuButton.setAlignmentX(CENTER_ALIGNMENT);
+        pMenuButton.setFocusPainted(false);
+        pMenuButton.setForeground(Color.WHITE);
+        pMenuButton.setBorderPainted(false);
+        pMenuButton.setContentAreaFilled(false);
 
         var pauseButton = new JButton("Resume game");
         pausePanel.setBackground(new Color(0,0,0,64));
@@ -104,6 +105,7 @@ public class Main extends JFrame {
         pausePanel.setLayout(new GridBagLayout());
         pausePanel.add(pauseLabel,gbc);
         pausePanel.add(pauseButton,gbc);
+        pausePanel.add(pMenuButton,gbc);
         pausePanel.add(pExitButton,gbc);
 
 
