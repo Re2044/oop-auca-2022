@@ -11,7 +11,7 @@ import static game.utilities.DrawingHelpers.*;
 import static game.utilities.DrawingHelpers.canvasSize;
 
 public class FieldView {
-    public static void draw(Graphics2D g, Field field, JPanel panel){
+    public static void draw(Graphics2D g, Field field, Component panel){
         float canvasWidth = panel.getWidth()/(float)field.getCol();
         float canvasHeight = panel.getHeight()/(float)field.getRow();
         canvasSize = Math.min(canvasHeight,canvasWidth)*2/3;
