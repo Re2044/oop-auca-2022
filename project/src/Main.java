@@ -22,36 +22,11 @@ public class Main extends JFrame {
     private static int currScore;
     private static int bestScore;
     private static int gameSpeed = 200;
-    class Canvas extends JPanel{
-        Canvas(){
-            var timer = new Timer(gameSpeed,e->{
-
-                if(gameState){
-                    if(mySnake.isDead()){
-                        layoutManager.last(containerPanel);
-                        gameState = false;
-                        bestScore = Math.max(bestScore,currScore);
-                    }
-                    else{
-                        mySnake.move();
-                        currScore = mySnake.getScore();
-                        repaint();
-                    }
-                }
-            });
-            timer.start();
-        }
-        @Override
-        protected void paintComponent(Graphics g){
-            super.paintComponent(g);
-            Graphics2D g2D = (Graphics2D) g;
-            FieldView.draw(g2D,myField,this);
-            SnakeView.draw(g2D,mySnake);
-            AppleView.draw(g2D,myField.getApple());
-        }
-    }
-
+    private static JLabel scoreLabel;
+    private static JLabel currScorePanel;
     Main(){
+        currScore = 0;
+        bestScore = 0;
         setTitle("Wise snake devouring golden apples in the magic world");
         setLocationRelativeTo(null);
         setSize(Params.WIDTH,Params.HEIGHT);
@@ -69,8 +44,7 @@ public class Main extends JFrame {
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                currScore = 0;
-                bestScore = 0;
+
                 layoutManager.next(containerPanel);
                 myField = new Field(numberOfRows,numberOfColumns,FIELD_DEFAULT_COLOR);
                 mySnake = new Snake(SNAKE_BEGIN_POS_X,SNAKE_BEGIN_POS_Y,SNAKE_DEFAULT_DIRECTION,myField,SNAKE_LENGTH);
@@ -145,10 +119,9 @@ public class Main extends JFrame {
 
 
 
-        var currScorePanel = new JLabel("Score: "+currScore);
+        currScorePanel = new JLabel("Score: 0");
         currScorePanel.setForeground(Color.WHITE);
-        currScorePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        mJPanel.add(currScorePanel,BorderLayout.NORTH);
+        mJPanel.add(currScorePanel,BorderLayout.LINE_START);
 
         menuPanel.setBackground(Color.BLACK);
         menuPanel.setLayout(new GridBagLayout());
@@ -206,7 +179,7 @@ public class Main extends JFrame {
         lostLabel.setForeground(Color.RED);
         lostLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        var scoreLabel = new JLabel("Your Score is : " + currScore);
+        scoreLabel = new JLabel("Your Score is : 0");
         scoreLabel.setForeground(Color.GREEN);
         scoreLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -243,10 +216,39 @@ public class Main extends JFrame {
 
        add(containerPanel);
 
-
-
-
     }
+    class Canvas extends JPanel{
+
+        Canvas(){
+            var timer = new Timer(gameSpeed,e->{
+
+                if(gameState){
+                    if(mySnake.isDead()){
+                        layoutManager.last(containerPanel);
+                        gameState = false;
+                        bestScore = Math.max(bestScore,currScore);
+                    }
+                    else{
+                        mySnake.move();
+                        scoreLabel.setText("Your Score is : " + mySnake.getScore());
+                        currScorePanel.setText("Score: "+mySnake.getScore());
+                        repaint();
+                    }
+                }
+            });
+            timer.start();
+        }
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            Graphics2D g2D = (Graphics2D) g;
+            FieldView.draw(g2D,myField,this);
+            SnakeView.draw(g2D,mySnake);
+            AppleView.draw(g2D,myField.getApple());
+
+        }
+    }
+
 
 
     public static void main(String[] args) {
