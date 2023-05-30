@@ -19,9 +19,26 @@ public class Main extends JFrame {
     CardLayout layoutManager = new CardLayout();
     JPanel containerPanel = new JPanel();
     private static boolean gameState = false;
+    private static int currScore = 0;
+    private static int bestScore = 0;
+    private static int gameSpeed = 200;
     class Canvas extends JPanel{
         Canvas(){
-            var timer = new Timer(DELAY,e->{if(gameState){if(mySnake.isDead()){ layoutManager.last(containerPanel);gameState = false;} else{mySnake.move();repaint();}}});
+            var timer = new Timer(gameSpeed,e->{
+
+                if(gameState){
+                    if(mySnake.isDead()){
+                        layoutManager.last(containerPanel);
+                        gameState = false;
+                        bestScore = Math.max(bestScore,currScore);
+                    }
+                    else{
+                        mySnake.move();
+                        currScore = mySnake.getScore();
+                        repaint();
+                    }
+                }
+            });
             timer.start();
         }
         @Override
@@ -125,12 +142,11 @@ public class Main extends JFrame {
         });
 
 
-        if(gameState){
-            var currScore = new JLabel("Score: "+(mySnake.getScore()));
-            currScore.setForeground(Color.WHITE);
-            currScore.setLayout(new FlowLayout(FlowLayout.LEFT));
-            mJPanel.add(currScore,BorderLayout.NORTH);
-        }
+
+        var currScorePanel = new JLabel("Score: "+(currScore));
+        currScorePanel.setForeground(Color.WHITE);
+        currScorePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        mJPanel.add(currScorePanel,BorderLayout.NORTH);
 
         menuPanel.setBackground(Color.BLACK);
         menuPanel.setLayout(new GridBagLayout());
@@ -186,10 +202,9 @@ public class Main extends JFrame {
         lostLabel.setFont(new Font(Font.DIALOG,Font.BOLD,45));
         lostLabel.setForeground(Color.RED);
 
-        if(mySnake!=null){
-            var ScoreLabel = new JLabel("Your Score is : " + mySnake.getScore()+"\n+ Congratulations!");
-            restartPanel.add(ScoreLabel,gbc);
-        }
+        var ScoreLabel = new JLabel("   Your Score is : " + currScore+"\n Congratulations!");
+        ScoreLabel.setForeground(Color.GREEN);
+
 
         menuButton.setBorderPainted(false);
         menuButton.setContentAreaFilled(false);
@@ -208,6 +223,7 @@ public class Main extends JFrame {
         secExitButton.setContentAreaFilled(false);
 
         restartPanel.add(lostLabel,gbc);
+        restartPanel.add(ScoreLabel,gbc);
         endButtonPanel.add(menuButton,gbc);
         endButtonPanel.add(secExitButton,gbc);
         restartPanel.add(endButtonPanel);
