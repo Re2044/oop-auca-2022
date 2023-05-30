@@ -138,12 +138,13 @@ public class Main extends JFrame {
         }
 
         menuPanel.setBackground(Color.BLACK);
-
+        var buttonPanel = new JPanel();
         startButton.setFont(BASIC_FONT);
         startButton.setAlignmentX(CENTER_ALIGNMENT);
-        startButton.setBackground(Color.BLACK);
+        startButton.setBackground(Color.DARK_GRAY);
         startButton.setFocusPainted(false);
-        startButton.setForeground(Color.BLUE);
+
+        startButton.setForeground(Color.WHITE);
         var Title = new JLabel("Wise snake devouring golden apples in the magic world");
         Title.setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
         Title.setForeground(Color.YELLOW);
@@ -154,7 +155,17 @@ public class Main extends JFrame {
         menuPanel.add(Title,gbc);
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        var exitButton = new JButton("Exit");
+        exitButton.addActionListener(e->{System.exit(0);});
+        exitButton.setFont(BASIC_FONT);
+        exitButton.setAlignmentX(CENTER_ALIGNMENT);
+        exitButton.setBackground(Color.DARK_GRAY);
+        exitButton.setFocusPainted(false);
+        exitButton.setForeground(Color.WHITE);
+        buttonPanel.add(startButton);
+        buttonPanel.add(exitButton);
         menuPanel.add(startButton,gbc);
+        menuPanel.add(exitButton,gbc);
 
         restartPanel.setBackground(Color.BLACK);
         restartButton.setFont(BASIC_FONT);
