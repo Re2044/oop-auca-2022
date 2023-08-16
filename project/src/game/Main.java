@@ -139,8 +139,8 @@ public class Main extends JFrame {
         mJPanel.getActionMap().put("pause", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               pauseMenu.setVisible(true);
-               gameState = false;
+                pauseMenu.setVisible(true);
+                gameState = false;
             }
         });
         mJPanel.getActionMap().put("up", new AbstractAction() {
@@ -292,7 +292,7 @@ public class Main extends JFrame {
         containerPanel.add(restartPanel);
 
 
-       add(containerPanel);
+        add(containerPanel);
 
     }
     class Canvas extends JPanel{
@@ -329,6 +329,6 @@ public class Main extends JFrame {
 
 
     public static void main(String[] args) {
-         new Main().setVisible(true);
+        new Main().setVisible(true);
     }
 }
